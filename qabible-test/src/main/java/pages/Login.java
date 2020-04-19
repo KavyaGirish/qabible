@@ -17,7 +17,7 @@ public class Login
 	WebElement password;
 	@FindBy(name="login-button")
 	WebElement login;
-	@FindBy(xpath="//*[@id=\"login-form\"]/div[1]/ul/li")
+	@FindBy(xpath="//*[@id=\"login-form\"]/div[1]/p")
 	WebElement errorMessage;
 	
 	public Login(WebDriver driver)
@@ -33,9 +33,9 @@ public class Login
 		login.click();
 		return new Homepage(driver);
 	}
-	public WebElement getErrorMessage()
+	public String getErrorMessage()
 	{
-		return errorMessage;
+		return errorMessage.getText();
 	}
 	public void clearTextFieldsInLoginPage()
 	{

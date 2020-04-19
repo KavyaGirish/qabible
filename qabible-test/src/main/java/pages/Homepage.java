@@ -30,9 +30,12 @@ public class Homepage
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}
-	public void clickLogOutButton()
+	public void clickUserIcon()
 	{
 		userDropdown.click();
+	}
+	public void clickLogOutButton()
+	{
 		logOutButton.click();
 	}
 	public String getHomepageHeaderText()	

@@ -20,12 +20,20 @@ public class ExcelUtility
 	static XSSFWorkbook work;
 	static XSSFSheet sheet;
 	
-	public static String readExcelCellData(String path, int i, int j) throws IOException
+	public static int getRowCount(String path, String sheetName) throws IOException
+	{
+		file= new FileInputStream(new File(path));
+		work= new XSSFWorkbook(file);
+		sheet= work.getSheet(sheetName);
+		return sheet.getLastRowNum();
+	}
+	
+	public static String readExcelCellData(String path, String sheetName, int i, int j) throws IOException
 	{
 		String cellValue="";
 		file= new FileInputStream(new File(path));
 		work= new XSSFWorkbook(file);
-		sheet= work.getSheet("Sheet1");
+		sheet= work.getSheet(sheetName);
 		
 		Cell cell= sheet.getRow(i).getCell(j);
 		if(cell.getCellType()==Cell.CELL_TYPE_NUMERIC)
@@ -40,7 +48,21 @@ public class ExcelUtility
 		{
 			cellValue= "";
 		}
-
 		return cellValue;
+	}
+	
+	public static void writeExcelCellData(String path, String sheetName, int i, int j, String value) throws IOException
+	{
+		file= new FileInputStream(new File(path));
+		work= new XSSFWorkbook(file);
+		sheet= work.getSheet(sheetName);
+		
+		Cell cell=  sheet.getRow(i).getCell(j);
+		//cell.setCellType(Cell.CELL_TYPE_STRING);
+		cell.setCellValue(value);
+		
+		fileOut= new FileOutputStream(path);
+		work.write(fileOut);
+		fileOut.close();
 	}
 }
