@@ -25,6 +25,7 @@ public class ExcelUtility
 		file= new FileInputStream(new File(path));
 		work= new XSSFWorkbook(file);
 		sheet= work.getSheet(sheetName);
+		
 		return sheet.getLastRowNum();
 	}
 	
@@ -57,8 +58,8 @@ public class ExcelUtility
 		work= new XSSFWorkbook(file);
 		sheet= work.getSheet(sheetName);
 		
-		Cell cell=  sheet.getRow(i).getCell(j);
-		//cell.setCellType(Cell.CELL_TYPE_STRING);
+		Cell cell=  sheet.getRow(i).createCell(j);
+		cell.setCellType(Cell.CELL_TYPE_STRING);
 		cell.setCellValue(value);
 		
 		fileOut= new FileOutputStream(path);
