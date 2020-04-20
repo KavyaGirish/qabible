@@ -12,14 +12,11 @@ public class CreateArea
 	WebDriver driver;
 	
 	@FindBy(xpath="/html/body/div/div/section[2]/div[1]/h1")
-	WebElement createAreaPageTitle;
-	
+	WebElement createAreaPageHeaderText;
 	@FindBy(xpath="/html/body/div/div/section[2]/div[1]/div/form/div[1]/input")
 	WebElement fieldNameInCreateAreaPage;
-	
 	@FindBy(xpath="/html/body/div/div/section[2]/div[1]/div/form/div[2]/textarea")
 	WebElement fieldDescriptionInCreateAreaPage;
-	
 	@FindBy(xpath="/html/body/div/div/section[2]/div[1]/div/form/div[3]/button")
 	WebElement buttonSave;
 	
@@ -28,9 +25,9 @@ public class CreateArea
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}
-	public String getCreateAreaPageTitle()
+	public String getCreateAreaPageHeaderText()
 	{
-		return createAreaPageTitle.getText();
+		return createAreaPageHeaderText.getText();
 	}
 	public void enterValueForNameInCreateAreaPage(String name)
 	{
@@ -47,5 +44,18 @@ public class CreateArea
 		PageUtility.waitForElement(driver, buttonSave, 5);
 		buttonSave.click();
 		return new AreaDetails(driver);
+	}
+	public boolean getWebElementsVisibilityInCreateAreaPage()
+	{
+		Boolean visibilityOfElement;
+		if(createAreaPageHeaderText.isDisplayed()&& fieldNameInCreateAreaPage.isDisplayed()&& fieldDescriptionInCreateAreaPage.isDisplayed()&&buttonSave.isDisplayed())
+		{
+			visibilityOfElement=true;
+		}
+		else
+		{
+			visibilityOfElement=false;
+		}
+		return visibilityOfElement;
 	}
 }

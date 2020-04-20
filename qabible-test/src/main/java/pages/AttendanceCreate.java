@@ -22,7 +22,8 @@ public class AttendanceCreate
 	WebElement date18April2020;
 	@FindBy(xpath="//*[@id=\"attendance-date-kvdate\"]/span[2]")
 	WebElement clearDate;
-	
+	@FindBy(xpath="//*[@id=\"attendance-date\"]")
+	WebElement textDate;
 	@FindBy(xpath="//*[@id=\"w0\"]/div[2]/button")
 	WebElement createButton;
 	
@@ -44,9 +45,31 @@ public class AttendanceCreate
 		date17April2020.click();
 		//date18April2020.click();
 	}
+	public void enterDate(String date)
+	{
+		textDate.sendKeys(date);
+	}
+	public String getDatePicked()
+	{
+		return textDate.getText().toString();
+	}
 	public AttendanceDetails clickCreateButton()
 	{
 		createButton.click();
 		return new AttendanceDetails(driver);
+	}
+	public boolean getWebElementsVisibilityInAttendencePage()
+	{
+		Boolean visibilityOfElements;
+		if(attendanceCreatePageHeaderText.isDisplayed()&& datePicker.isDisplayed()&& clearDate.isDisplayed()&& textDate.isDisplayed()&&createButton.isDisplayed())
+		{
+			visibilityOfElements= true;
+		}
+		else
+		{
+			visibilityOfElements= false;
+		}
+		return visibilityOfElements;
+		
 	}
 }

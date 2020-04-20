@@ -108,4 +108,17 @@ public class Leave
 		saveButton.click();
 		return new Attendance(driver);
 	}
+	public boolean getWebElementVisibilityInLeavePage()
+	{
+		Boolean visibilityOfElement;
+		if(leavePageHeaderText.isDisplayed()&& leaveDaysDropdown.isDisplayed()&& workerDropdown.isDisplayed()&&reasonForLeave.isDisplayed()&&saveButton.isDisplayed())
+		{
+			visibilityOfElement= true;
+		}
+		else
+		{
+			visibilityOfElement= false;
+		}
+		return visibilityOfElement;
+	}
 }

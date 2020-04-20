@@ -15,6 +15,8 @@ public class Holiday
 	WebElement holidayPageHeaderText;
 	@FindBy(xpath="/html/body/div/div/section[2]/div[1]/p/a")
 	WebElement createHolidayButton;
+	@FindBy(xpath="//*[@id=\"w0\"]/table")
+	WebElement tableContainingHolidays;
 	@FindBy(xpath="//*[@id=\"w0\"]/table/tbody/tr[10]/td[7]/a[1]")
 	WebElement viewButtonOfHoliday2;
 	@FindBy(xpath="//*[@id=\"w0\"]/table/tbody/tr[10]/td[7]/a[2]")
@@ -64,5 +66,17 @@ public class Holiday
 		deleteButtonOfHoliday3.click();
 		return new HolidayDeletionAlert(driver);
 	}
-	
+	public boolean getWebElementsVisiblityInHolidayPage()
+	{
+		Boolean visibilityOfElement;
+		if(holidayPageHeaderText.isDisplayed()&& createHolidayButton.isDisplayed()&& tableContainingHolidays.isDisplayed())
+		{
+			visibilityOfElement= true;
+		}
+		else
+		{
+			visibilityOfElement= false;
+		}
+		return visibilityOfElement;
+	}
 }
