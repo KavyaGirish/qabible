@@ -33,27 +33,34 @@ public class Regression extends TestHelper
 	String sheet= "Sheet1";
 	
 	//@Test 
-	public void verifyValidLogin()
+	public void verifyValidLogin() throws IOException
 	{
 		String expectedPageHeader= "ERP | Dashboard";
-			
+		
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+		
 		Login login= new Login(driver);
-		Homepage homepage= login.login("Kavya","kavya9094");
+		Homepage homepage= login.login(username,password);
 			
 		String actualPageHeader= homepage.getHomepageHeaderText();
 		assertEquals(actualPageHeader, expectedPageHeader, "Homepage Launches!");
+		
+		ExcelUtility.writeExcelCellData(path, sheet, 1, 2, "Pass");
+		
+		homepage.clickUserIcon();
+		homepage.clickLogOutButton();
 	}
 	
 	@Test 
 	public void verifyInvalidLogin() throws IOException, InterruptedException, NullPointerException
 	{
 		
-		String expectedPageHeader= "ERP | Dashboard";
 		//String expectedErrorMessage= "Please fix the following errors:";
 		
 		int rowCount= ExcelUtility.getRowCount(path, sheet);
 		
-		for(int i=1; i<rowCount; i++)
+		for(int i=2; i<rowCount; i++)
 		{
 			String username= ExcelUtility.readExcelCellData(path,sheet,i,0);
 			String password= ExcelUtility.readExcelCellData(path,sheet,i,1);
@@ -62,26 +69,11 @@ public class Regression extends TestHelper
 			login.clearTextFieldsInLoginPage();
 			
 			Homepage homepage= login.login(username,password);
-			if(username.equals("Kavya")&& password.equals("kavya9094"))
-			{
-				String actualPageHeader= homepage.getHomepageHeaderText();
-				assertEquals(actualPageHeader, expectedPageHeader, "Homepage Launches!");
+			//String actualErrorMessage= login.getErrorMessage();
+			//System.out.println(actualErrorMessage);
+			//assertEquals(actualErrorMessage, expectedErrorMessage, "Login fails!");
 				
-				ExcelUtility.writeExcelCellData(path, sheet, i, 2, "Pass");
-				
-				homepage.clickUserIcon();
-				homepage.clickLogOutButton();
-				
-				ExcelUtility.writeExcelCellData(path, sheet, i, 2, "Pass");
-			}
-			else
-			{
-				//String actualErrorMessage= login.getErrorMessage();
-				//System.out.println(actualErrorMessage);
-				//assertEquals(actualErrorMessage, expectedErrorMessage, "Login fails!");
-				
-				ExcelUtility.writeExcelCellData(path, sheet, i, 2, "Fail");
-			}
+			ExcelUtility.writeExcelCellData(path, sheet, i, 2, "Fail");
 		}	
 	}	
 	
