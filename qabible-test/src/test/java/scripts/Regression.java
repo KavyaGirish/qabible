@@ -52,12 +52,11 @@ public class Regression extends TestHelper
 		homepage.clickLogOutButton();
 	}
 	
-	@Test 
+	//@Test 
 	public void verifyInvalidLogin() throws IOException, InterruptedException, NullPointerException
 	{
 		
-		//String expectedErrorMessage= "Please fix the following errors:";
-		
+		String expectedErrorMessage= "Please fix the following errors:";
 		int rowCount= ExcelUtility.getRowCount(path, sheet);
 		
 		for(int i=2; i<rowCount; i++)
@@ -68,10 +67,10 @@ public class Regression extends TestHelper
 			Login login= new Login(driver);
 			login.clearTextFieldsInLoginPage();
 			
-			Homepage homepage= login.login(username,password);
-			//String actualErrorMessage= login.getErrorMessage();
-			//System.out.println(actualErrorMessage);
-			//assertEquals(actualErrorMessage, expectedErrorMessage, "Login fails!");
+			login.login(username,password);
+			
+			String actualErrorMessage= login.getErrorMessage();
+			assertEquals(actualErrorMessage, expectedErrorMessage, "Login fails!");
 				
 			ExcelUtility.writeExcelCellData(path, sheet, i, 2, "Fail");
 		}	

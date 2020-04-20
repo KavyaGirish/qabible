@@ -2,21 +2,21 @@
 <testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="76990" started-at="2020-04-19T21:26:15 IST" finished-at="2020-04-19T21:27:32 IST">
+  <suite name="Suite" duration-ms="32117" started-at="2020-04-20T16:47:18 IST" finished-at="2020-04-20T16:47:50 IST">
     <groups>
     </groups>
-    <test name="Test" duration-ms="76990" started-at="2020-04-19T21:26:15 IST" finished-at="2020-04-19T21:27:32 IST">
+    <test name="Test" duration-ms="32117" started-at="2020-04-20T16:47:18 IST" finished-at="2020-04-20T16:47:50 IST">
       <class name="scripts.Regression">
-        <test-method status="PASS" signature="launchBrowser()[pri:0, instance:scripts.Regression@5a8806ef]" name="launchBrowser" is-config="true" duration-ms="47291" started-at="2020-04-19T21:26:15 IST" finished-at="2020-04-19T21:27:02 IST">
+        <test-method status="PASS" signature="launchBrowser()[pri:0, instance:scripts.Regression@5a8806ef]" name="launchBrowser" is-config="true" duration-ms="12043" started-at="2020-04-20T16:47:18 IST" finished-at="2020-04-20T16:47:30 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method status="FAIL" signature="verifyInvalidLogin()[pri:0, instance:scripts.Regression@5a8806ef]" name="verifyInvalidLogin" duration-ms="24088" started-at="2020-04-19T21:27:02 IST" finished-at="2020-04-19T21:27:27 IST">
+        <test-method status="FAIL" signature="verifyInvalidLogin()[pri:0, instance:scripts.Regression@5a8806ef]" name="verifyInvalidLogin" duration-ms="14275" started-at="2020-04-20T16:47:30 IST" finished-at="2020-04-20T16:47:44 IST">
           <exception class="java.lang.NullPointerException">
             <full-stacktrace>
               <![CDATA[java.lang.NullPointerException
 at utilities.ExcelUtility.readExcelCellData(ExcelUtility.java:39)
-at scripts.Regression.verifyInvalidLogin(Regression.java:58)
+at scripts.Regression.verifyInvalidLogin(Regression.java:64)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -51,7 +51,7 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyInvalidLogin -->
-        <test-method status="PASS" signature="closeBrowser()[pri:0, instance:scripts.Regression@5a8806ef]" name="closeBrowser" is-config="true" duration-ms="5380" started-at="2020-04-19T21:27:27 IST" finished-at="2020-04-19T21:27:32 IST">
+        <test-method status="PASS" signature="closeBrowser()[pri:0, instance:scripts.Regression@5a8806ef]" name="closeBrowser" is-config="true" duration-ms="5568" started-at="2020-04-20T16:47:44 IST" finished-at="2020-04-20T16:47:50 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBrowser -->

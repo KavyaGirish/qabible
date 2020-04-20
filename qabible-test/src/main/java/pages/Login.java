@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.Homepage;
+import utilities.PageUtility;
 
 public class Login 
 {
@@ -35,6 +36,7 @@ public class Login
 	}
 	public String getErrorMessage()
 	{
+		PageUtility.waitForElement(driver, errorMessage, 5);
 		return errorMessage.getText();
 	}
 	public void clearTextFieldsInLoginPage()
