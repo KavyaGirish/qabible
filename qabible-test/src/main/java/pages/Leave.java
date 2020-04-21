@@ -27,12 +27,16 @@ public class Leave
 	WebElement cancelButtonInDatePicker;
 	@FindBy(xpath="/html/body/div[2]/div[4]/button[2]")
 	WebElement applyButtonInDatePicker;
+	@FindBy(xpath="//*[@id=\"w0\"]/div[2]/span/span[1]/span")
+	WebElement workerText;
 	@FindBy(xpath="//*[@id=\"w0\"]/div[2]/span/span[1]/span/span[2]")
 	WebElement workerDropdown;
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/select/option[2]")
 	WebElement worker1;
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/select/option[3]")
 	WebElement worker2;
+	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/select/option[4]")
+	WebElement worker3;
 	@FindBy(xpath="//*[@id=\"leaveform-reason\"]")
 	WebElement reasonForLeave;
 	@FindBy(xpath="//*[@id=\"w0\"]/div[4]/button")
@@ -59,17 +63,17 @@ public class Leave
 	}
 	public void clickEndDateOfLeaveForWorker1()
 	{
-		PageUtility.waitForElement(driver, endDateForLeave_Worker1, 5);
+		PageUtility.waitForElement(driver, endDateForLeave_Worker1, 10);
 		endDateForLeave_Worker1.click();
 	}
 	public void clickStartDateOfLeaveForWorker2()
 	{
-		PageUtility.waitForElement(driver, startDateForLeave_Worker2, 5);
+		PageUtility.waitForElement(driver, startDateForLeave_Worker2, 10);
 		startDateForLeave_Worker2.click();
 	}
 	public void clickEndDateOfLeaveForWorker2()
 	{
-		PageUtility.waitForElement(driver, endDateForLeave_Worker2, 5);
+		PageUtility.waitForElement(driver, endDateForLeave_Worker2, 10);
 		endDateForLeave_Worker2.click();
 	}
 	public void clickCancelButtonInDatePicker()
@@ -87,6 +91,21 @@ public class Leave
 		PageUtility.waitForElement(driver, workerDropdown, 10);
 		workerDropdown.click();
 	}
+	public String getNameOfWorker1()
+	{
+		//PageUtility.waitForElement(driver, worker1, 5);
+		return worker1.getText();
+	}
+	public String getNameOfWorker2()
+	{
+		//PageUtility.waitForElement(driver, worker2, 5);
+		return worker2.getText();
+	}
+	public String getNameOfWorker3()
+	{
+		//PageUtility.waitForElement(driver, worker3, 5);
+		return worker3.getText();
+	}
 	public void clickWorker1()
 	{
 		PageUtility.waitForElement(driver, worker1, 10);
@@ -96,6 +115,11 @@ public class Leave
 	{
 		PageUtility.waitForElement(driver, worker2, 10);
 		worker2.click();
+	}
+	public void clickWorker3()
+	{
+		PageUtility.waitForElement(driver, worker3, 10);
+		worker3.click();
 	}
 	public void enterReasonForLeave(String reason)
 	{

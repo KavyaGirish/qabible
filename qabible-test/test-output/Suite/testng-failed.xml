@@ -5,7 +5,7 @@
     <classes>
       <class name="scripts.Regression">
         <methods>
-          <include name="verifyInvalidLogin"/>
+          <include name="verifyUserIsAbleToUpdateAreasInAreaPage"/>
           <include name="launchBrowser"/>
           <include name="closeBrowser"/>
         </methods>

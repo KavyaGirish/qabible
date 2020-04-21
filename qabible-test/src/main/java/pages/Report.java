@@ -1,9 +1,13 @@
 package pages;
 
+import java.io.File;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import utilities.PageUtility;
 
 public class Report 
 {
@@ -33,6 +37,10 @@ public class Report
 	WebElement downloadAttendanceOfMonthButton;
 	@FindBy(xpath="//*[@id=\"w3-container\"]/table")
 	WebElement tableContainingAttendances;
+	@FindBy(xpath="/html/body/div[3]/div/div/div[3]/div/div/button[1]")
+	WebElement cancelButtonInAlertBox;
+	@FindBy(id="//*[@id=\"1b9eef27-26d4-478a-b14c-04f30c2aa3db\"]")
+	WebElement okButtonInAlertBox;
 	
 	public Report(WebDriver driver) 
 	{
@@ -86,11 +94,45 @@ public class Report
 	}
 	public void clickFindButton()
 	{
+		PageUtility.waitForElement(driver, findButton, 10);
 		findButton.click();
 	}
 	public void clickDownloadAttendanceOfTheMonthButton()
 	{
+		PageUtility.waitForElement(driver, downloadAttendanceOfMonthButton, 10);
 		downloadAttendanceOfMonthButton.click();
 	}
-
+	public void clickCancelButtonInAlertBox()
+	{
+		PageUtility.waitForElement(driver, cancelButtonInAlertBox, 5);
+		cancelButtonInAlertBox.click();
+	}
+	public void clickOkButtonInAlertBox()
+	{
+		//PageUtility.waitForElement(driver, okButtonInAlertBox, 20);
+		okButtonInAlertBox.click();
+	}
+	public boolean isAttendanceReportDownloaded(String downloadPath, String extension)
+	{
+		boolean statusOfDownload= false;
+		File downloadsFolder = new File(downloadPath);
+    	File[] files = downloadsFolder.listFiles();
+    	if(files==null || files.length==0) 
+    	{
+    		statusOfDownload=false;
+    	}
+    	File lastDownloadedFile= files[0];
+    	for(int i= 1; i<files.length; i++) 
+    	{
+    		if(lastDownloadedFile.lastModified()< files[i].lastModified()) 
+    		{
+    			lastDownloadedFile = files[i];
+    			if(lastDownloadedFile.getName().contains(extension))
+    			{
+    				statusOfDownload=true;
+    			}
+    		}
+    	}
+    	return statusOfDownload;
+	}
 }

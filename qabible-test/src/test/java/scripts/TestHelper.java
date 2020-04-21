@@ -25,6 +25,7 @@ public class TestHelper
 		String path= "D:\\Workspace_Kavya\\qabible-test\\src\\test\\resources\\qaenvironment.txt";
 		String url= NotepadUtility.readSampleNotepad(path);
 		driver.get(url);
+		driver.manage().window().maximize();
 	}
 
 	@AfterMethod

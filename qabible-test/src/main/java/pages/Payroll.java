@@ -33,7 +33,7 @@ public class Payroll
 	}	
 	public boolean getWebElementsVisiblityInPayrollPage()
 	{
-		Boolean visibilityOfElement;
+		boolean visibilityOfElement;
 		if(payrollPageHeaderText.isDisplayed()&& monthYearPicker.isDisplayed()&& clearMonthYear.isDisplayed()&& textMonthYear.isDisplayed()&&findButton.isDisplayed()&&columnsDropdown.isDisplayed()&&exportAllDropdown.isDisplayed()&&tableContainingPayrollDetails.isDisplayed())
 		{
 			visibilityOfElement= true;
