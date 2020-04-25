@@ -1,9 +1,12 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import utilities.PageUtility;
 
@@ -27,10 +30,12 @@ public class Leave
 	WebElement cancelButtonInDatePicker;
 	@FindBy(xpath="/html/body/div[2]/div[4]/button[2]")
 	WebElement applyButtonInDatePicker;
-	@FindBy(xpath="//*[@id=\"w0\"]/div[2]/span/span[1]/span")
-	WebElement workerText;
-	@FindBy(xpath="//*[@id=\"w0\"]/div[2]/span/span[1]/span/span[2]")
-	WebElement workerDropdown;
+	@FindBy(xpath="//*[@id=\"w0\"]/div[2]/label")
+	WebElement workerLabel;
+	@FindBy(xpath="//*[@id=\"select2-leaveform-worker-container\"]")
+	WebElement worker;
+	@FindBy(xpath="//*[@id=\"leaveform-worker\"]")
+	WebElement workerDropdownList;
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/select/option[2]")
 	WebElement worker1;
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/select/option[3]")
@@ -88,20 +93,20 @@ public class Leave
 	}
 	public void clickWorkerDropdown()
 	{
-		PageUtility.waitForElement(driver, workerDropdown, 10);
-		workerDropdown.click();
+		PageUtility.waitForElement(driver, worker, 10);
+		worker.click();
 	}
-	public String getNameOfWorker1()
+	public String getWorker1()
 	{
-		//PageUtility.waitForElement(driver, worker1, 5);
+		//PageUtility.waitForElement(driver, worker2, 5);
 		return worker1.getText();
 	}
-	public String getNameOfWorker2()
+	public String getWorker2()
 	{
 		//PageUtility.waitForElement(driver, worker2, 5);
 		return worker2.getText();
 	}
-	public String getNameOfWorker3()
+	public String getWorker3()
 	{
 		//PageUtility.waitForElement(driver, worker3, 5);
 		return worker3.getText();
@@ -113,7 +118,7 @@ public class Leave
 	}
 	public void clickWorker2()
 	{
-		PageUtility.waitForElement(driver, worker2, 10);
+		PageUtility.waitForElement(driver, worker2, 20);
 		worker2.click();
 	}
 	public void clickWorker3()
@@ -135,7 +140,7 @@ public class Leave
 	public boolean getWebElementVisibilityInLeavePage()
 	{
 		Boolean visibilityOfElement;
-		if(leavePageHeaderText.isDisplayed()&& leaveDaysDropdown.isDisplayed()&& workerDropdown.isDisplayed()&&reasonForLeave.isDisplayed()&&saveButton.isDisplayed())
+		if(leavePageHeaderText.isDisplayed()&& leaveDaysDropdown.isDisplayed()&& workerLabel.isDisplayed()&&reasonForLeave.isDisplayed()&&saveButton.isDisplayed())
 		{
 			visibilityOfElement= true;
 		}

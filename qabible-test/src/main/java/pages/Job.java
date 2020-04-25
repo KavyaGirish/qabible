@@ -19,11 +19,16 @@ public class Job
 	WebElement createJobButton;
 	@FindBy(xpath="//*[@id=\"w0\"]/table")
 	WebElement tableContainingJobDetails;
-	
-	
 	@FindBy(xpath="//*[@id=\"w0\"]/table/tbody/tr/td[2]")
 	List<WebElement> columnJobTitleOfTableJobsCreated;	
-	
+	@FindBy(xpath="/html/body/div/div/section[2]/div[1]/div/table/tbody/tr[3]/td[5]/a[1]")
+	WebElement viewButtonOfAccountant;
+	@FindBy(xpath="/html/body/div/div/section[2]/div[1]/div/table/tbody/tr[3]/td[5]/a[3]")
+	WebElement updateButtonOfAccountant;
+	@FindBy(xpath="//*[@id=\"w0\"]/table/tbody/tr[2]/td[5]/a[1]")
+	WebElement viewButtonOfBusinessAnalyst;
+	@FindBy(xpath="//*[@id=\"w0\"]/table/tbody/tr[2]/td[5]/a[3]")
+	WebElement updateButtonOfBusinessAnalyst;
 	@FindBy(xpath="/html/body/div/aside/section/ul/li[9]/a")
 	WebElement createAreaModule;	
 	@FindBy(xpath="/html/body/div/aside/section/ul/li[8]/a")
@@ -78,5 +83,26 @@ public class Job
 		PageUtility.waitForElement(driver, areaModule, 5);
 		areaModule.click();
 		return new Area(driver);
+	}
+	public JobDetails clickViewButtonOfAccountant()
+	{
+		viewButtonOfAccountant.click();
+		return new JobDetails(driver);
+	}
+	public UpdateJobDetails clickUpdateButtonOfAccountant()
+	{
+		updateButtonOfAccountant.click();
+		return new UpdateJobDetails(driver);
+		
+	}
+	public JobDetails clickViewButtonOfBusinessAnalyst()
+	{
+		viewButtonOfBusinessAnalyst.click();
+		return new JobDetails(driver);
+	}
+	public UpdateJobDetails clickUpdateButtonOfBusinessAnalyst()
+	{
+		updateButtonOfBusinessAnalyst.click();
+		return new UpdateJobDetails(driver);
 	}
 }

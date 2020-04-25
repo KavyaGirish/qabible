@@ -1,6 +1,7 @@
 package scripts;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,12 +22,14 @@ import pages.HolidayDeletionAlert;
 import pages.HolidayDetails;
 import pages.Homepage;
 import pages.Job;
+import pages.JobDetails;
 import pages.Leave;
 import pages.Login;
 import pages.Payroll;
 import pages.Report;
 import pages.UpdateAreaDetails;
 import pages.UpdateHolidayDetails;
+import pages.UpdateJobDetails;
 import utilities.ExcelUtility;
 
 public class Regression extends TestHelper
@@ -113,7 +116,7 @@ public class Regression extends TestHelper
 		
 		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
 		
-		assertEquals(attendance.getWebElementsVisibilityInAttendancePageLoaged(),true, "Attendance Page Is Loaded");
+		assertTrue(attendance.getWebElementsVisibilityInAttendancePageLoaged(), "Attendance Page Is Loaded");
 	}
 	
 	//@Test
@@ -129,7 +132,7 @@ public class Regression extends TestHelper
 		
 		Job job= homepage.clickOptionJobFromJobsModule();
 		
-		assertEquals(job.getWebElementsVisiblityInJobPageLoaded(), true, "Job page is loaded!");
+		assertTrue(job.getWebElementsVisiblityInJobPageLoaded(), "Job page is loaded!");
 	}
 
 	//@Test
@@ -145,7 +148,7 @@ public class Regression extends TestHelper
 		Job job= homepage.clickOptionJobFromJobsModule();
 		CreateArea createArea= job.clickCreateAreaInJobPage();
 		
-		assertEquals(createArea.getWebElementsVisibilityInCreateAreaPage(), true, "Create Area Page is loaded!");
+		assertTrue(createArea.getWebElementsVisibilityInCreateAreaPage(), "Create Area Page is loaded!");
 	}
 	
 	//@Test 
@@ -196,7 +199,7 @@ public class Regression extends TestHelper
 			Job job= homepage.clickOptionJobFromJobsModule();
 			Area area= job.clickAreaInJobpage();
 			
-			assertEquals(area.getWebElementsVisiblityInAreaPage(), true, "Create Area Page is loaded!");
+			assertTrue(area.getWebElementsVisiblityInAreaPage(), "Create Area Page is loaded!");
 	}
 	
 	//@Test
@@ -226,7 +229,7 @@ public class Regression extends TestHelper
 	}
 	
 	//@Test 
-	public void verifyUserIsAbleToUpdateAreasInAreaPage() throws IOException
+	public void verifyUserIsAbleToUpdateDetailsOfAnAreaInAreaPage() throws IOException
 	{
 		
 		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
@@ -270,7 +273,7 @@ public class Regression extends TestHelper
 		
 		Holiday holiday= attendance.clickHolidayInAttendancePage();
 		
-		assertEquals(holiday.getWebElementsVisiblityInHolidayPage(), true, "Holiday page is loaded!");
+		assertTrue(holiday.getWebElementsVisiblityInHolidayPage(), "Holiday page is loaded!");
 	}
 	
 	//@Test 
@@ -414,8 +417,7 @@ public class Regression extends TestHelper
 		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
 		AttendanceCreate attendanceCreate= attendance.clickCreateAttendanceInAttendancePage();
 		
-		assertEquals(attendanceCreate.getWebElementsVisibilityInAttendencePage(), true, "Attendance Create page loaded!");
-		
+		assertTrue(attendanceCreate.getWebElementsVisibilityInAttendencePage(), "Attendance Create page loaded!");
 	}
 	
 	//@Test	
@@ -468,15 +470,15 @@ public class Regression extends TestHelper
 		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
 		Leave leave= attendance.clickLeaveInAttendancePage();
 				
-		assertEquals(leave.getWebElementVisibilityInLeavePage(), true, "Leave Page is loaded!");
+		assertTrue(leave.getWebElementVisibilityInLeavePage(), "Leave Page is loaded!");
 	}
 	
-	//@Test //Assertion error
+	//@Test //Assertion error on worker dropdown
 	public void verifyUserIsAbleToSeeOptionsOfWorkerDropdownInLeavePage() throws IOException
 	{
-		String expectedOption1= "Sagar Alias Jacky";
-		String expectedOption2= "Thomas Mathew";
-		String expectedOption3= "Anil P Tharian";
+		String expectedWorker1= "Sagar Alias Jacky";
+		String expectedWorker2= "Thomas Mathew";
+		String expectedWorker3= "Anil P Tharian";
 		
 		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
 		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
@@ -489,18 +491,18 @@ public class Regression extends TestHelper
 		Leave leave= attendance.clickLeaveInAttendancePage();
 		
 		leave.clickWorkerDropdown();
+	
+		String actualWorker1= leave.getWorker1();
+		String actualWorker2= leave.getWorker2();
+		String actualWorker3= leave.getWorker3();
 		
-		String actualOption1= leave.getNameOfWorker1();
-		String actualOption2= leave.getNameOfWorker2();
-		String actualOption3= leave.getNameOfWorker3();
-		
-		assertEquals(actualOption1,expectedOption1,"Worker1 visible");
-		assertEquals(actualOption2,expectedOption2,"Worker2 visible");
-		assertEquals(actualOption3,expectedOption3,"Worker3 visible");
-		
+		assertEquals(actualWorker1,expectedWorker1,"Worker1 visible");
+		assertEquals(actualWorker2,expectedWorker2,"Worker2 visible");
+		assertEquals(actualWorker3,expectedWorker3,"Worker3 visible");
+	
 	}
 	
-	//@Test //fails since worker dropdown cause timeout exception on clicking options
+	//@Test //fails since Worker is not interacting
 	public void verifyUserIsAbleToApplyLeaveInLeavePage() throws IOException
 	{
 			
@@ -539,10 +541,10 @@ public class Regression extends TestHelper
 		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
 		Report report= attendance.clickReportInAttendancePage();
 			
-		assertEquals(report.getWebElementsVisiblityInReportPage(), true, "Report page is loaded!");
+		assertTrue(report.getWebElementsVisiblityInReportPage(), "Report page is loaded!");
 	}
 	
-	//@Test 
+	//@Test //Ok button of AlertBox not clickable
 	public void verifyUserIsAbleToDownloadAttendanceOfTheMonthInReportPage() throws IOException
 	{
 		String downloadFolderPath= "C:\\Users\\sabar\\Downloads";
@@ -558,70 +560,230 @@ public class Regression extends TestHelper
 		Report report= attendance.clickReportInAttendancePage();
 			
 		report.clickMonthYearPicker();
-		report.clickFebruary2020();
+		report.clickMarch2020();
 		report.clickFindButton();
 		report.clickDownloadAttendanceOfTheMonthButton();
-		report.clickOkButtonInAlertBox();
+		//report.clickCancelButtonInAlertBox();
 		
-	    //boolean actualDownloadFileStatus= report.isAttendanceReportDownloaded(downloadFolderPath, "xlsx");
-	    //assertEquals(actualDownloadFileStatus, true, "Attendance of the month is downloaded");
+		//report.clickOkButtonInAlertBox();
+		//driver.switchTo().alert().accept();
 		
+	    boolean actualDownloadFileStatus= report.isAttendanceReportDownloaded(downloadFolderPath, "xlsx");
+	    assertTrue(actualDownloadFileStatus, "Attendance report is downloaded!");
+	
 	}
 	
-	//@Test	//fails since client dropdown not interacting //banglore branch is replaced now..
+	//@Test	//client dropdown not interacting
 	public void verifyUserIsAbleToCreateJobInJobPage() throws IOException
 	{
+		
 		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
 		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-			
-		/*
-		String expectedNewlyCreatedJobForTvmmInJobPage="Job1";
-		String actualNewlyCreatedJobForTvmmInJobPage;
-			
-		String expectedNewlyCreatedJobForBhopalInJobPage="Job2";
-		String actualNewlyCreatedJobForBhopalInJobPage;
-		*/
 			
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
 			
-		homepage.clickModuleJobsInDashboard();			Job job= homepage.clickOptionJobFromJobsModule();
+		homepage.clickModuleJobsInDashboard();			
+		Job job= homepage.clickOptionJobFromJobsModule();
 			
 		CreateJob createJob= job.clickCreateJobsButtonInJobPage();
-			
-		createJob.clickBranchValueBangloreFromBranchDropdownInCreateJobPage();			
-		createJob.enterJobTitleValueInCreateJobPage("Job1");
-		//createJob.clickClientValueClient1FromClientDropdownInCreateJobPge();	//not interacting
-		//createJob.clickJobTypeValueNormalFromJobTypeDropdownInCreateJobge();
-		createJob.enterValueForPoInCreateJobPage("xyz");
-		createJob.enterValueForDescriptionInCreateJobPage("Job1 for Test!");
-		createJob.clickSaveButtonInCreateJobPage();
-		//job.getNewlyCreatedJobInJobPage();
-			
-	}
-	
-	//@Test //Incomplete
-	public void verifyUserIsAbleToViewExistingJobInJobPage()
-	{
+		
+		createJob.clickBranchDropdown();
+		createJob.clickBranchTvmm();
+		createJob.enterJobTitle("Test job");
+		createJob.clickClientDropdown();
+		createJob.clickClient_Client2();
+		createJob.clickJobTypeDropdown();
 		
 	}
 	
-	//@Test //Incomplete
-	public void verifyUserIsAbleToUpdateExistingJobInJobPage()
+	//@Test //assertion fails //error message fails to display
+	public void verifyIfJobIsCreatedWithoutClient() throws IOException
 	{
+		
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+			
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
+			
+		homepage.clickModuleJobsInDashboard();			
+		Job job= homepage.clickOptionJobFromJobsModule();
+			
+		CreateJob createJob= job.clickCreateJobsButtonInJobPage();
+		
+		createJob.clickBranchDropdown();
+		createJob.clickBranchTvmm();
+		createJob.enterJobTitle("Test job without Client");
+		createJob.clickJobTypeDropdown();
+		createJob.clickJobType_Overtime();
+		createJob.enterValueForPo("abc");
+		createJob.enterValueForDescription("testing");
+		createJob.clickSaveButton();
+	
+		//assertTrue(createJob.getNoClientError(), "Error!");
 		
 	}
 	
-	//@Test //Incomplete
-	public void verifyUserIsAbleToSeeOptionsInClientDropdownInUpdateJobDetailsPage()
+	//@Test 
+	public void verifyUserIsAbleToViewExistingJobInJobPage() throws IOException
 	{
+		String expectedHeaderTextOfBusinessAnalyst= "Business Analyst";
+		String expectedClient="Client1";
+		String expectedJobType= "Normal";
+		String expectedPo= "xyz";
+		String expectedDescription= "Challenging";
+		String expectedDate= "Apr 10, 2020";
+		
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+		
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
 			
+		homepage.clickModuleJobsInDashboard();			
+		Job job= homepage.clickOptionJobFromJobsModule();
+			
+		JobDetails jobDetails= job.clickViewButtonOfBusinessAnalyst();
+		
+		String actualHeaderTextOfBusinessAnalyst= jobDetails.getHeaderTextOfJobDetailsPageOfBusinessAnalyst();
+		String actualClient= jobDetails.getClientOfBusinessAnalyst();
+		String actualJobType= jobDetails.getJobTypeOfBusinessAnalyst();
+		String actualPo= jobDetails.getPoOfBusinessAnalyst();
+		String actualDescription= jobDetails.getDescriptionOfBusinessAnalyst();
+		String actualDate= jobDetails.getDateOfBusinessAnalyst();
+		
+		assertEquals(actualHeaderTextOfBusinessAnalyst, expectedHeaderTextOfBusinessAnalyst, "Title!");
+		assertEquals(actualClient, expectedClient, "Client");
+		assertEquals(actualJobType, expectedJobType, "Job type!");
+		assertEquals(actualPo, expectedPo, "Po!");
+		assertEquals(actualDescription, expectedDescription, "Description!");
+		assertEquals(actualDate, expectedDate, "Date!");
+		
 	}
 	
-	//@Test //Incomplete
-	public void verifyUserIsAbleToSeeOptionsInJobTypeDropdownInUpdateJobDetailsPage()
+	//@Test 
+	public void verifyUserIsAbleToUpdateExistingJobInJobPage() throws IOException
 	{
-				
+		String expectedHeaderTextOfAccountant= "Update Job: Accountant";
+		/*
+		String expectedClient= "Client2";
+		String expectedJobType= "Normal";
+		String expectedPo= "xyz";
+		String expectedDescription= "Accounting";
+		String expectedDate= "Apr 10, 2020";
+		*/
+		
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+		
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
+			
+		homepage.clickModuleJobsInDashboard();			
+		Job job= homepage.clickOptionJobFromJobsModule();
+		
+		UpdateJobDetails updateJobDetails= job.clickUpdateButtonOfAccountant();
+		
+		String actualHeaderTextOfAccountant= updateJobDetails.getHeaderTextOfUpdateJobDetailsPageOfAccountant();
+		assertEquals(actualHeaderTextOfAccountant, expectedHeaderTextOfAccountant, "Header!");
+		
+		updateJobDetails.clickJobType();
+		updateJobDetails.clickJobTypeNormal();
+		job= updateJobDetails.clickSaveButton();
+		
+		/*
+		JobDetails jobDetails= job.clickViewButtonOfAccountant();
+		String actualClient= jobDetails.getClientOfAccountant();
+		String actualJobType= jobDetails.getJobTypeOfAccountant();
+		String actualPo= jobDetails.getPoOfAccountant();
+		String actualDescription= jobDetails.getDescriptionOfAccountant();
+		String actualDate= jobDetails.getDateOfAccountant();
+		
+		assertEquals(actualClient, expectedClient, "Client");
+		assertEquals(actualJobType, expectedJobType, "JobType");
+		assertEquals(actualPo, expectedPo, "Po");
+		assertEquals(actualDescription, expectedDescription, "Description");
+		assertEquals(actualDate, expectedDate, "Date");
+		*/
+	}
+	
+	//@Test //error message not asserted
+	public void verifyErrorDisplayedWhenClientValueIsBlankInUpdateJobDetailPage() throws IOException
+	{
+		String expectedErrorMessage= "Client cannot be blank.";
+		
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+		
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
+			
+		homepage.clickModuleJobsInDashboard();			
+		Job job= homepage.clickOptionJobFromJobsModule();
+		
+		UpdateJobDetails updateJobDetails= job.clickUpdateButtonOfAccountant();
+		updateJobDetails.clearClientValue();
+	
+		assertTrue(updateJobDetails.checkNoClientErrorDisplayed(),"Error!");
+		
+	}
+	
+	//@Test //client dropdown options not interacting
+	public void verifyUserIsAbleToSeeOptionsInClientDropdownInUpdateJobDetailsPage() throws IOException
+	{
+		
+		String expectedClientOption1= "AAA";
+		String expectedClientOption2= "Client1";
+		String expectedClientOption3= "Client2";
+		
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+		
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
+			
+		homepage.clickModuleJobsInDashboard();			
+		Job job= homepage.clickOptionJobFromJobsModule();
+		
+		UpdateJobDetails updateJobDetails= job.clickUpdateButtonOfAccountant();
+		//updateJobDetails.clearClientValue();
+		updateJobDetails.clickClientDropdown();
+		
+		String actualClientOption1= updateJobDetails.getClientAAA();
+		String actualClientOption2= updateJobDetails.getClient1();
+		String actualClientOption3= updateJobDetails.getClient2();
+		
+		assertEquals(actualClientOption1, expectedClientOption1, "AAA");
+		assertEquals(actualClientOption2, expectedClientOption2, "Client1");
+		assertEquals(actualClientOption3, expectedClientOption3, "Client2");
+		
+	}
+	
+	//@Test 
+	public void verifyUserIsAbleToSeeOptionsInJobTypeDropdownInUpdateJobDetailsPage() throws IOException
+	{
+		String expectedJobtypeOption1= "Normal";
+		String expectedJobtypeOption2= "Overtime";
+		
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+		
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
+			
+		homepage.clickModuleJobsInDashboard();			
+		Job job= homepage.clickOptionJobFromJobsModule();
+		
+		UpdateJobDetails updateJobDetails= job.clickUpdateButtonOfAccountant();
+		updateJobDetails.clickJobType();
+		
+		String actualJobtypeOption1= updateJobDetails.getJobType_Normal();
+		String actualJobtypeOption2= updateJobDetails.getJobType_Overtime();
+		
+		assertEquals(actualJobtypeOption1, expectedJobtypeOption1, "normal!");
+		assertEquals(actualJobtypeOption2, expectedJobtypeOption2, "overtime!");
+		
 	}
 	
 	//@Test
@@ -657,14 +819,32 @@ public class Regression extends TestHelper
 	}
 		
 	//@Test //Incomplete
-	public void verifyUserIsAbleToViewExistingPayrollDetailsOfEmployeeInPayrollPage()
+	public void verifyUserIsAbleToViewExistingPayrollDetailsOfEmployeeInPayrollPage() throws IOException
 	{
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+			
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
+			
+		homepage.clickModuleJobsInDashboard();
+		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
+		Payroll payroll= attendance.clickPayrollInAttendancePage();
 					
 	}
 	
 	//@Test //Incomplete
-	public void verifyUserIsAbleToUpdateExistingPayrollDetailsOfEmployeeInPayrollPage()
+	public void verifyUserIsAbleToUpdateExistingPayrollDetailsOfEmployeeInPayrollPage() throws IOException
 	{
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+			
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
+			
+		homepage.clickModuleJobsInDashboard();
+		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
+		Payroll payroll= attendance.clickPayrollInAttendancePage();
 						
 	}
 }

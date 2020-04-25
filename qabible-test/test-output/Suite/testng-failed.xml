@@ -5,9 +5,9 @@
     <classes>
       <class name="scripts.Regression">
         <methods>
-          <include name="verifyUserIsAbleToUpdateAreasInAreaPage"/>
           <include name="launchBrowser"/>
           <include name="closeBrowser"/>
+          <include name="verifyIfJobIsCreatedWithoutClient"/>
         </methods>
       </class> <!-- scripts.Regression -->
     </classes>

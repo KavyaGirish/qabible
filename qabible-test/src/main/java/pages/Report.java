@@ -33,13 +33,13 @@ public class Report
 	WebElement textMonthYear;
 	@FindBy(xpath="//*[@id=\"w0\"]/div[2]/div/button")
 	WebElement findButton;
-	@FindBy(xpath="//*[@id=\"w1-xlsx\"]")
+	@FindBy(xpath="/html/body/div/div/section[2]/div/div[1]/div[2]/div/div/ul/li/a")
 	WebElement downloadAttendanceOfMonthButton;
 	@FindBy(xpath="//*[@id=\"w3-container\"]/table")
 	WebElement tableContainingAttendances;
 	@FindBy(xpath="/html/body/div[3]/div/div/div[3]/div/div/button[1]")
 	WebElement cancelButtonInAlertBox;
-	@FindBy(id="//*[@id=\"1b9eef27-26d4-478a-b14c-04f30c2aa3db\"]")
+	@FindBy(xpath="/html/body/div[3]/div/div/div[3]/div/div/button[2]")
 	WebElement okButtonInAlertBox;
 	
 	public Report(WebDriver driver) 
@@ -104,12 +104,12 @@ public class Report
 	}
 	public void clickCancelButtonInAlertBox()
 	{
-		PageUtility.waitForElement(driver, cancelButtonInAlertBox, 5);
+		PageUtility.waitForElement(driver, cancelButtonInAlertBox, 20);
 		cancelButtonInAlertBox.click();
 	}
 	public void clickOkButtonInAlertBox()
 	{
-		//PageUtility.waitForElement(driver, okButtonInAlertBox, 20);
+		PageUtility.waitForElement(driver, okButtonInAlertBox, 20);
 		okButtonInAlertBox.click();
 	}
 	public boolean isAttendanceReportDownloaded(String downloadPath, String extension)
@@ -121,15 +121,18 @@ public class Report
     	{
     		statusOfDownload=false;
     	}
-    	File lastDownloadedFile= files[0];
-    	for(int i= 1; i<files.length; i++) 
+    	else
     	{
-    		if(lastDownloadedFile.lastModified()< files[i].lastModified()) 
+    		File lastDownloadedFile= files[0];
+    		for(int i= 1; i<files.length; i++) 
     		{
-    			lastDownloadedFile = files[i];
-    			if(lastDownloadedFile.getName().contains(extension))
+    			if(lastDownloadedFile.lastModified()< files[i].lastModified()) 
     			{
-    				statusOfDownload=true;
+    				lastDownloadedFile = files[i];
+    				if(lastDownloadedFile.getName().contains(extension))
+    				{
+    					statusOfDownload=true;
+    				}
     			}
     		}
     	}

@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -18,38 +19,41 @@ public class CreateJob
 	@FindBy(xpath="/html/body/div[1]/header/nav/div/ul/form/select")
 	WebElement branchDropdown;
 	
+	@FindBy(xpath="//*[@id=\"branchform-branch\"]/option[1]")
+	WebElement branchTvmm;
+	@FindBy(xpath="//*[@id=\"branchform-branch\"]/option[2]")
+	WebElement branchBhopal;
+	
 	@FindBy(id="job-title")
-	WebElement fieldJobTitle;
+	WebElement jobTitle;
 	
-	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/div[1]/div/select")
-	WebElement fieldClientDropdown;
-	
+	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/div[1]/div/span/span[1]/span/span[2]")
+	WebElement clientDropdown;
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/div[1]/div/select/option[2]")
-	WebElement optionValueAAAInClientDropdown;
-	
+	WebElement client_AAA;
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/div[1]/div/select/option[3]")
-	WebElement optionValueClient1InClientDropdown;
-	
+	WebElement client_Client1;
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/div[1]/div/select/option[4]")
-	WebElement optionValueClient2InClientDropdown;
+	WebElement client_Client2;
+	
+	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/div[1]/div/div")
+	WebElement noClientErrorMessage;
 	
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[3]/div[1]/div/select")
-	WebElement fieldJobTypeDropdown;
-	
+	WebElement jobTypeDropdown;
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[3]/div[1]/div/select/option[2]")
-	WebElement optionValueNormalJobTypeDropdown;
-	
+	WebElement jobType_Normal;
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[3]/div[1]/div/select/option[3]")
-	WebElement optionValueOvertimeJobTypeDropdown;
+	WebElement jobType_Overtime;
 	
 	@FindBy(id="job-po")
-	WebElement fieldPo;
+	WebElement po;
 	
 	@FindBy(id="job-description")
-	WebElement fieldJobDescription;
+	WebElement jobDescription;
 	
 	@FindBy(xpath="//*[@id=\"w0\"]/div[5]/button")
-	WebElement buttonSave;
+	WebElement saveButton;
 	
 	public CreateJob(WebDriver driver) 
 	{
@@ -60,11 +64,24 @@ public class CreateJob
 	{
 		return textAttendanceNotDone.getText();
 	}
-	public void clickBranchValueBangloreFromBranchDropdownInCreateJobPage()
+	public void clickBranchDropdown()
+	{
+		branchDropdown.click();
+	}
+	public void clickBranchTvmm()
+	{
+		branchTvmm.click();
+	}
+	public void clickBranchBhopal()
+	{
+		branchBhopal.click();
+	}
+	/*
+	public void clickBranchValueTvmmFromBranchDropdownInCreateJobPage()
 	{
 		branchDropdown.click();
 		Select selectBranch= new Select(branchDropdown);
-		selectBranch.selectByVisibleText("Banglore");
+		selectBranch.selectByVisibleText("Tvmm");
 	}
 	public void clickBranchValueBhopalFromBranchDropdownInCreateJobPage()
 	{
@@ -72,49 +89,66 @@ public class CreateJob
 		Select selectBranch= new Select(branchDropdown);
 		selectBranch.selectByVisibleText("Bhopal");
 	}
-	public void enterJobTitleValueInCreateJobPage(String jobTitle)
+	*/
+	public void enterJobTitle(String jobTitleValue)
 	{
-		fieldJobTitle.sendKeys(jobTitle);
+		jobTitle.sendKeys(jobTitleValue);
 	}
-	public void clickClientValueAAAFromClientDropdownInCreateJobPage()
+	public void clickClientDropdown()
 	{
-		PageUtility.waitForElement(driver, fieldClientDropdown, 5);
-		fieldClientDropdown.click();
-		optionValueAAAInClientDropdown.click();
+		clientDropdown.click();
 	}
-	public void clickClientValueClient1FromClientDropdownInCreateJobPage()
+	public void clickClient_AAA()
 	{
-		PageUtility.waitForElement(driver, fieldClientDropdown, 5);
-		fieldClientDropdown.click();
-		optionValueClient1InClientDropdown.click();
+		PageUtility.waitForElement(driver, client_AAA, 10);
+		new Actions(driver).doubleClick(client_AAA);
 	}
-	public void clickClientValueClient2FromClientDropdownInCreateJobPage()
+	public void clickClient_Client1()
 	{
-		PageUtility.waitForElement(driver, fieldClientDropdown, 5);
-		fieldClientDropdown.click();
-		optionValueClient2InClientDropdown.click();
+		PageUtility.waitForElement(driver, client_Client1, 10);
+		new Actions(driver).doubleClick(client_Client1);
 	}
-	public void clickJobTypeValueNormalFromJobTypeDropdownInCreateJobPage()
+	public void clickClient_Client2()
 	{
-		fieldJobTypeDropdown.click();
-		optionValueNormalJobTypeDropdown.click();
+		PageUtility.waitForElement(driver, client_Client2, 10);
+		new Actions(driver).doubleClick(client_Client2);
 	}
-	public void clickJobTypeValueOvertimeFromJobTypeDropdownInCreateJobPage()
+	public void clickJobTypeDropdown()
 	{
-		fieldJobTypeDropdown.click();
-		optionValueOvertimeJobTypeDropdown.click();
+		jobTypeDropdown.click();
 	}
-	public void enterValueForPoInCreateJobPage(String po)
+	public void clickJobType_Normal()
 	{
-		fieldPo.sendKeys(po);
+		PageUtility.waitForElement(driver, jobType_Normal, 5);
+		jobType_Normal.click();
 	}
-	public void enterValueForDescriptionInCreateJobPage(String description)
+	public void clickJobType_Overtime()
 	{
-		fieldJobDescription.sendKeys(description);
+		PageUtility.waitForElement(driver, jobType_Overtime, 5);
+		jobType_Overtime.click();
 	}
-	public Job clickSaveButtonInCreateJobPage()
+	public void enterValueForPo(String poValue)
 	{
-		buttonSave.click();
+		po.sendKeys(poValue);
+	}
+	public void enterValueForDescription(String description)
+	{
+		jobDescription.sendKeys(description);
+	}
+	public Job clickSaveButton()
+	{
+		saveButton.click();
 		return new Job(driver);
+	}
+	public boolean getNoClientError()
+	{
+		if(noClientErrorMessage.isDisplayed())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
