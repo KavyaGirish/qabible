@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -60,6 +61,16 @@ public class Report
 		}
 		return visibilityOfElement;
 	}
+	public void mouseHoverOnDatePicker()
+	{
+		//PageUtility.waitForElement(driver, monthYearPicker, 10);
+		new Actions(driver).moveToElement(monthYearPicker).build().perform();
+	}
+	public String getTooltipTextOfDatePickerButton()
+	{
+		String toolTipText= monthYearPicker.getAttribute("title");
+		return toolTipText;
+	}
 	public void clickMonthYearPicker()
 	{
 		monthYearPicker.click();
@@ -97,6 +108,7 @@ public class Report
 		PageUtility.waitForElement(driver, findButton, 10);
 		findButton.click();
 	}
+	
 	public void clickDownloadAttendanceOfTheMonthButton()
 	{
 		PageUtility.waitForElement(driver, downloadAttendanceOfMonthButton, 10);

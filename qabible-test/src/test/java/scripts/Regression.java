@@ -26,10 +26,12 @@ import pages.JobDetails;
 import pages.Leave;
 import pages.Login;
 import pages.Payroll;
+import pages.PayrollDetails;
 import pages.Report;
 import pages.UpdateAreaDetails;
 import pages.UpdateHolidayDetails;
 import pages.UpdateJobDetails;
+import pages.UpdatePayrollDetails;
 import utilities.ExcelUtility;
 
 public class Regression extends TestHelper
@@ -80,6 +82,24 @@ public class Regression extends TestHelper
 			ExcelUtility.writeExcelCellData(path, sheet, i, 2, "Fail");
 		}	
 	}	
+	
+	//@Test
+	public void verifyTooltipTextOfJobsModuleInDashboard() throws IOException
+	{
+		
+		String expectedTooltip= "Jobs";
+		
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+		
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
+		
+		homepage.mouseHoverOnJobsModuleInDashboard();
+		String actualTooltip= homepage.getTooltipTextOfJobsModule();
+		assertEquals(actualTooltip, expectedTooltip, "Tooltip!");
+		
+	}
 	
 	//@Test 
 	public void verifyUserIsAbleToSeeOptionsOfJobsModuleInDashboard() throws IOException
@@ -565,11 +585,10 @@ public class Regression extends TestHelper
 		report.clickDownloadAttendanceOfTheMonthButton();
 		//report.clickCancelButtonInAlertBox();
 		
-		//report.clickOkButtonInAlertBox();
-		//driver.switchTo().alert().accept();
+		report.clickOkButtonInAlertBox();
 		
-	    boolean actualDownloadFileStatus= report.isAttendanceReportDownloaded(downloadFolderPath, "xlsx");
-	    assertTrue(actualDownloadFileStatus, "Attendance report is downloaded!");
+	    //boolean actualDownloadFileStatus= report.isAttendanceReportDownloaded(downloadFolderPath, "xlsx");
+	    //assertTrue(actualDownloadFileStatus, "Attendance report is downloaded!");
 	
 	}
 	
@@ -801,10 +820,13 @@ public class Regression extends TestHelper
 			
 		assertEquals(payroll.getWebElementsVisiblityInPayrollPage(), true, "Payroll Page is loaded!");
 	}
-		
-	//@Test //Incomplete
-	public void verifyUserIsAbleToExportPayrollInPayrollPage() throws IOException
+	
+	//@Test
+	public void verifyTooltipTextOfColumnsDropdownInPayrollPage() throws IOException
 	{
+		
+		String expectedTooltipText= "Select columns to export";
+		
 		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
 		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 			
@@ -814,13 +836,100 @@ public class Regression extends TestHelper
 		homepage.clickModuleJobsInDashboard();
 		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
 		Payroll payroll= attendance.clickPayrollInAttendancePage();
-			
-			//page methods pending
-	}
 		
-	//@Test //Incomplete
+		payroll.mouseHoverOnColumnsDropdown();
+		String actualTooltipText= payroll.getTooltipTextOfColumnsDropdown();
+		assertEquals(actualTooltipText, expectedTooltipText, "Tooltip text of Cols!");
+		
+	}
+	
+	//@Test 
+	public void verifyTooltipTextOfExportAllDropdownInPayrollPage() throws IOException
+	{
+		
+		String expectedTooltipText= "Export data in selected format";
+		
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+			
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
+			
+		homepage.clickModuleJobsInDashboard();
+		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
+		Payroll payroll= attendance.clickPayrollInAttendancePage();
+		payroll.mouseHoverOnExportAllDropdown();
+		String actualTooltipText= payroll.getTooltipTextOfExportAllDropdown();
+		assertEquals(actualTooltipText, expectedTooltipText, "Tooltip text of Export All!");
+		
+	}
+	
+	//@Test 
+	public void verifyToggleAllCheckboxTogglesAllColumnsOfColumnsDropdownInPayrollPage() throws IOException
+	{
+		
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+			
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
+			
+		homepage.clickModuleJobsInDashboard();
+		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
+		Payroll payroll= attendance.clickPayrollInAttendancePage();
+		payroll.clickColumsDropdown();
+		
+		payroll.clickToggleAllCheckBoxInColumnsDropdown();
+		boolean actualToggle= payroll.isAllDropdownOptionsToggled();
+		assertTrue(actualToggle,"Toggling!");
+		
+	}
+	
+	//@Test
+	public void verifyUserIsAbleToSeeOptionsOfExportAllDropdownInPayrollPage() throws IOException
+	{
+		String expectedOption1= "HTML";
+		String expectedOption2= "CSV";
+		String expectedOption3= "Text";
+		String expectedOption4= "PDF";
+		String expectedOption5= "Excel 95 +";
+		String expectedOption6= "Excel 2007+";
+		
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+			
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
+			
+		homepage.clickModuleJobsInDashboard();
+		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
+		Payroll payroll= attendance.clickPayrollInAttendancePage();
+		payroll.clickExportAllDropdown();
+		
+		String actualOption1= payroll.getOptionHTMLFromExportAll();
+		String actualOption2= payroll.getOptionCSVFromExportAll();
+		String actualOption3= payroll.getOptionTextFromExportAll();
+		String actualOption4= payroll.getOptionPDFFromExportAll();
+		String actualOption5= payroll.getOptionExcel95FromExportAll();
+		String actualOption6= payroll.getOptionExcel2007FromExportAll();
+		
+		assertEquals(actualOption1, expectedOption1, "HTML");
+		assertEquals(actualOption2, expectedOption2, "CSV");
+		assertEquals(actualOption3, expectedOption3, "Text");
+		assertEquals(actualOption4, expectedOption4, "PDF");
+		assertEquals(actualOption5, expectedOption5, "Excel 95 +");
+		assertEquals(actualOption6, expectedOption6, "Excel 2007+");
+		
+	}
+	
+	//@Test 
 	public void verifyUserIsAbleToViewExistingPayrollDetailsOfEmployeeInPayrollPage() throws IOException
 	{
+		
+		String expectedHeaderText= "sagar";
+		String expectedEmployeeFullName= "Sagar Alias Jacky";
+		String expectedEmployeeBranch= "Tvmm";
+		
 		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
 		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 			
@@ -831,9 +940,20 @@ public class Regression extends TestHelper
 		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
 		Payroll payroll= attendance.clickPayrollInAttendancePage();
 					
+		PayrollDetails payrollDetails= payroll.clickViewButtonOfEmployeeSagar();
+		
+		String actualHeaderText= payrollDetails.getHeaderTextOfPayrollDetailsOfSagar();
+		assertEquals(actualHeaderText, expectedHeaderText, "Header text!");
+		
+		String actualEmployeeFullName= payrollDetails.getEmployeeFullName();
+		String actualEmployeeBranch= payrollDetails.getEmployeeBranch();
+		
+		assertEquals(actualEmployeeFullName, expectedEmployeeFullName, "Sagar Alias Jacky!");
+		assertEquals(actualEmployeeBranch, expectedEmployeeBranch, "Tvmm");
+		
 	}
 	
-	//@Test //Incomplete
+	//@Test 
 	public void verifyUserIsAbleToUpdateExistingPayrollDetailsOfEmployeeInPayrollPage() throws IOException
 	{
 		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
@@ -845,6 +965,25 @@ public class Regression extends TestHelper
 		homepage.clickModuleJobsInDashboard();
 		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
 		Payroll payroll= attendance.clickPayrollInAttendancePage();
-						
+			
+		UpdatePayrollDetails updatePayrollDetails= payroll.clickUpdateButtonOfEmployeeSagar();
+		
 	}
+
+	//@Test //Incomplete
+	public void verifyUserIsAbleToExportPayrollInPayrollPage() throws IOException
+	{
+		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
+		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+				
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
+				
+		homepage.clickModuleJobsInDashboard();
+		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
+		Payroll payroll= attendance.clickPayrollInAttendancePage();
+				
+			
+	}
+	
 }

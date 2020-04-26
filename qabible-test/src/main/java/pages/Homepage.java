@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -41,6 +42,15 @@ public class Homepage
 	public String getHomepageHeaderText()	
 	{
 		return homepageHeaderText.getText();
+	}
+	public void mouseHoverOnJobsModuleInDashboard()
+	{
+		new Actions(driver).moveToElement(jobsModuleInDashboard).build().perform();
+	}
+	public String getTooltipTextOfJobsModule()
+	{
+		String toolTipText= jobsModuleInDashboard.getAttribute("title");
+		return toolTipText;
 	}
 	public void clickModuleJobsInDashboard()
 	{
