@@ -13,14 +13,8 @@ public class UpdateHolidayDetails
 	
 	@FindBy(xpath="//*[@id=\"holiday-date-kvdate\"]/span[1]")
 	WebElement datePicker;
-	@FindBy(xpath="/html/body/div[2]/div[1]/table/tbody/tr[3]/td[4]")
-	WebElement date15April2020;
-	@FindBy(xpath="/html/body/div[2]/div[1]/table/tbody/tr[3]/td[5]")
-	WebElement date16April2020;
-	@FindBy(xpath="/html/body/div[2]/div[1]/table/tbody/tr[3]/td[6]")
-	WebElement date17April2020;
-	@FindBy(xpath="/html/body/div[2]/div[1]/table/tbody/tr[3]/td[7]")
-	WebElement date18April2020;
+	@FindBy(xpath="/html/body/div[2]/div[1]/table/tbody/tr[3]/td[contains(@class,'today day')]")
+	WebElement currentDate;
 	@FindBy(xpath="//*[@id=\"holiday-date-kvdate\"]/span[2]")
 	WebElement clearDate;
 	@FindBy(xpath="//*[@id=\"holiday-date\"]")
@@ -35,7 +29,7 @@ public class UpdateHolidayDetails
 	WebElement branchBhopal;
 	@FindBy(xpath="//*[@id=\"holiday-branch_id\"]/option[4]")
 	WebElement branchKozhikode;
-	@FindBy(xpath="//*[@id=\"holiday-branch_id\"]/option[6]")
+	@FindBy(xpath="//*[@id=\"holiday-branch_id\"]/option[44]")
 	WebElement branchAll;
 	@FindBy(xpath="//*[@id=\"holiday-description\"]")
 	WebElement holidayDescription;
@@ -50,41 +44,26 @@ public class UpdateHolidayDetails
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}
-	public void clickDatePickerButtonInCreateHolidayPage()
+	public void clickDatePicker()
 	{
 		PageUtility.waitForElement(driver, datePicker, 5);
 		datePicker.click();
 	}
-	public void clickDate15April2020InCreateHolidayPage()
+	public void clickDate()
 	{
-		PageUtility.waitForElement(driver, date15April2020, 5);
-		date15April2020.click();
+		PageUtility.waitForElement(driver, currentDate, 5);
+		currentDate.click();
 	}
-	public void clickDate16April2020InCreateHolidayPage()
-	{
-		PageUtility.waitForElement(driver, date16April2020, 5);
-		date16April2020.click();
-	}
-	public void clickDate17April2020InCreateHolidayPage()
-	{
-		PageUtility.waitForElement(driver, date17April2020, 5);
-		date17April2020.click();
-	}
-	public void clickDate18April2020InCreateHolidayPage()
-	{
-		PageUtility.waitForElement(driver, date18April2020, 5);
-		date18April2020.click();
-	}
-	public void clickCrossButtonInCreateHolidayPage()
+	public void clickClose()
 	{
 		PageUtility.waitForElement(driver, clearDate, 5);
 		clearDate.click();
 	}
-	public String getUpdatedDatePickedForHoliday()
+	public String getDate()
 	{
 		return holidayDate.getText();
 	}
-	public void enterUpdatedTitleForHolidayInCreateHolidayPage(String title)
+	public void enterTitle(String title)
 	{
 		PageUtility.waitForElement(driver, holidayTitle, 5);
 		holidayTitle.clear();
@@ -95,39 +74,43 @@ public class UpdateHolidayDetails
 		PageUtility.waitForElement(driver, branchDropdown, 5);
 		branchDropdown.click();
 	}
-	public void clickBranchBanglore()
+	public void clickBranch(String branch)
 	{
-		PageUtility.waitForElement(driver, branchBanglore, 5);
-		branchBanglore.click();
+		if(branch=="Banglore")
+		{
+			PageUtility.waitForElement(driver, branchBanglore, 5);
+			branchBanglore.click();
+		}
+		else if(branch=="Bhopal")
+		{
+			PageUtility.waitForElement(driver, branchBhopal, 5);
+			branchBhopal.click();
+		}
+		else if(branch=="Kozhikode")
+		{
+			PageUtility.waitForElement(driver, branchKozhikode, 5);
+			branchKozhikode.click();
+		}
+		else if(branch=="All")
+		{
+			PageUtility.waitForElement(driver, branchAll, 5);
+			branchAll.click();
+		}
+		else {}
 	}
-	public void clickBranchBhopal()
-	{
-		PageUtility.waitForElement(driver, branchBhopal, 5);
-		branchBhopal.click();
-	}
-	public void clickBranchKozhikode()
-	{
-		PageUtility.waitForElement(driver, branchKozhikode, 5);
-		branchKozhikode.click();
-	}
-	public void clickBranchAll()
-	{
-		PageUtility.waitForElement(driver, branchAll, 5);
-		branchAll.click();
-	}
-	public void enterUpdatedDescriptionForHoliday(String description)
+	public void enterDescription(String description)
 	{
 		PageUtility.waitForElement(driver, holidayDescription, 5);
 		holidayDescription.clear();
 		holidayDescription.sendKeys(description);
 	}
-	public void clickHolidayStatus()
+	public void clickStatus()
 	{
 		PageUtility.waitForElement(driver, holidayStatus, 5);
 		//holidayStatus.clear();
 		holidayStatus.click();
 	}
-	public HolidayDetails clickSaveButtonInCreateHolidayPage()
+	public HolidayDetails clickSave()
 	{
 		PageUtility.waitForElement(driver, saveButton, 5);
 		saveButton.click();

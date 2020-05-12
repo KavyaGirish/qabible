@@ -73,87 +73,100 @@ public class AttendanceMarkWindow
 	{
 		return attendanceMarkWindowHeaderText.getText();
 	}
-	public AttendanceDetails clickCloseWindowButton()
+	public AttendanceDetails clickClose() //close window
 	{
 		closeWindowButton.click();
 		return new AttendanceDetails(driver);
 	}
-	public void enterTimeInValue(int timeInHours, int timeInMinutes)
+	public void enterTimeIn(int timeInHours, int timeInMinutes)
 	{
 		attendanceTimeInText.sendKeys(String.valueOf(timeInHours)+":"+String.valueOf(timeInMinutes));
 	}
-	public void enterTimeOutValue(int timeOutHours, int timeOutMinutes)
+	public void enterTimeOut(int timeOutHours, int timeOutMinutes)
 	{
 		attendanceTimeOutText.sendKeys(String.valueOf(timeOutHours)+":"+String.valueOf(timeOutMinutes));
 	}
-	public void clickTimeInButton()
+	public void clickTimeIn()
 	{
 		attendanceTimeIn.click();
 	}
-	public void enterTimeInHoursValue(int timeInHours)
+	public void enterTimeInHours(int timeInHours)
 	{
 		attendanceTimeInHours.sendKeys(String.valueOf(timeInHours));
 	}
-	public void enterTimeInMinutesValue(int timeInMinutes)
+	public void enterTimeInMinutes(int timeInMinutes)
 	{
 		attendanceTimeInMinutes.sendKeys(String.valueOf(timeInMinutes));
 	}
-	public void clickTimeOutButton()
+	public void clickTimeOut()
 	{
 		attendanceTimeOut.click();
 	}
-	public void enterTimeOutHoursValue(int timeOutHours)
+	public void enterTimeOutHours(int timeOutHours)
 	{
 		attendanceTimeOutHours.sendKeys(String.valueOf(timeOutHours));
 	}
-	public void enterTimeOutMinutesValue(int timeOutMinutes)
+	public void enterTimeOutMinutes(int timeOutMinutes)
 	{
 		attendanceTimeOutMinutes.sendKeys(String.valueOf(timeOutMinutes));
 	}
-	public void clickAttendanceStatusDropdown()
+	public void clickStatusDropdown()
 	{
 		attendanceStatusDropdown.click();
 	}
-	public void clickStatusAbsent()
+	public void clickStatus(String status) //parameter
 	{
-		statusAbsent.click();
+		if(status=="Absent")
+		{
+			statusAbsent.click();
+		}
+		else if(status=="Present")
+		{
+			statusPresent.click();
+		}
+		else if(status=="InMissing")
+		{
+			statusInMissing.click();
+		}
+		else if(status=="OutMissing")
+		{
+			statusOutMissing.click();
+		}
+		else
+		{}
 	}
-	public void clickStatusPresent()
-	{
-		statusPresent.click();
-	}
-	public void clickStatusInMissing()
-	{
-		statusInMissing.click();
-	}
-	public void clickStatusOutMissing()
-	{
-		statusOutMissing.click();
-	}
+	
 	public void clickShiftDropdown()
 	{
 		shiftDropdown.click();
 	}
-	public void clickShiftA()
+	
+	public void clickShift(String shift)
 	{
-		shiftA.click();
+		if(shift=="A")
+		{
+			shiftA.click();
+		}
+		else if(shift=="B")
+		{
+			shiftB.click();
+		}
+		else if(shift=="C")
+		{
+			shiftC.click();
+		}
+		else if(shift=="G")
+		{
+			shiftG.click();
+		}
+		else if(shift=="N")
+		{
+			shiftN.click();
+		}
+		else
+		{}
 	}
-	public void clickShiftB()
-	{
-		shiftB.click();
-	}
-	public void clickShiftC()
-	{
-		shiftC.click();
-	}
-	public void clickShiftG()
-	{
-		shiftG.click();
-	}
-	public void clickShiftN()
-	{
-		shiftN.click();
-	}
+	
 	public void enterOvertimeValueInHours(String overtime) 
 	{
 		overtimeInHours.sendKeys(overtime);
@@ -162,7 +175,7 @@ public class AttendanceMarkWindow
 	{
 		reason.sendKeys(reasonForAbsence);
 	}
-	public AttendanceDetails clickSaveButtonInAttendanceMarkWindow()
+	public AttendanceDetails clickSave()
 	{
 		saveButton.click();
 		return new AttendanceDetails(driver);

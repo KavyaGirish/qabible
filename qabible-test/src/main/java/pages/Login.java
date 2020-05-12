@@ -39,7 +39,7 @@ public class Login
 		PageUtility.waitForElement(driver, errorMessage, 5);
 		return errorMessage.getText();
 	}
-	public void clearTextFieldsInLoginPage()
+	public void clearTextFields()
 	{
 		username.clear();
 		password.clear();

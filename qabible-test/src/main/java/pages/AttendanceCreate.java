@@ -13,13 +13,8 @@ public class AttendanceCreate
 	WebElement attendanceCreatePageHeaderText;
 	@FindBy(xpath="//*[@id=\"attendance-date-kvdate\"]/span[1]")
 	WebElement datePicker;
-	
-	@FindBy(xpath="/html/body/div[2]/div[1]/table/tbody/tr[3]/td[5]")
-	WebElement date16April2020;
-	@FindBy(xpath="/html/body/div[2]/div[1]/table/tbody/tr[3]/td[6]")
-	WebElement date17April2020;
-	@FindBy(xpath="/html/body/div[2]/div[1]/table/tbody/tr[3]/td[7]")
-	WebElement date18April2020;
+	@FindBy(xpath="/html/body/div[2]/div[1]/table/tbody/tr/td[contains(@class,'today day')]")
+	WebElement currentDate;
 	@FindBy(xpath="//*[@id=\"attendance-date-kvdate\"]/span[2]")
 	WebElement clearDate;
 	@FindBy(xpath="//*[@id=\"attendance-date\"]")
@@ -42,23 +37,14 @@ public class AttendanceCreate
 	}
 	public void clickDate()
 	{
-		date17April2020.click();
-		//date18April2020.click();
+		currentDate.click();
 	}
-	public void enterDate(String date)
-	{
-		textDate.sendKeys(date);
-	}
-	public String getDatePicked()
-	{
-		return textDate.getText().toString();
-	}
-	public AttendanceDetails clickCreateButton()
+	public AttendanceDetails clickCreate()
 	{
 		createButton.click();
 		return new AttendanceDetails(driver);
 	}
-	public boolean getWebElementsVisibilityInAttendencePage()
+	public boolean getWebElementsVisibility()
 	{
 		Boolean visibilityOfElements;
 		if(attendanceCreatePageHeaderText.isDisplayed()&& datePicker.isDisplayed()&& clearDate.isDisplayed()&& textDate.isDisplayed()&&createButton.isDisplayed())

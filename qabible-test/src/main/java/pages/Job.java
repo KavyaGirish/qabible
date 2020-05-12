@@ -43,7 +43,7 @@ public class Job
 	{
 		return jobPageHeaderText.getText();
 	}
-	public boolean getWebElementsVisiblityInJobPageLoaded()
+	public boolean getWebElementsVisibility()
 	{
 		Boolean visibilityOFElement;
 		if(jobPageHeaderText.isDisplayed() && createJobButton.isDisplayed() && tableContainingJobDetails.isDisplayed() )
@@ -57,13 +57,13 @@ public class Job
 		return visibilityOFElement;
 		
 	}
-	public CreateJob clickCreateJobsButtonInJobPage()
+	public CreateJob clickCreateJobs()
 	{
 		PageUtility.waitForElement(driver, createJobButton, 5);
 		createJobButton.click();
 		return new CreateJob(driver);
 	}
-	public String getCreatedJobInJobPage() //pending
+	public String getJobCreated() //pending
 	{
 		//from Dynamic Web Table
 		List<WebElement> rowOfTableJobs= columnJobTitleOfTableJobsCreated;
@@ -72,37 +72,44 @@ public class Job
 		String newlyCreatedJob= rowOfTableJobs.get(rowCountOfTableJobs-1).getText();
 		return newlyCreatedJob;
 	}
-	public CreateArea clickCreateAreaInJobPage()
+	public CreateArea clickCreateArea()
 	{
 		PageUtility.waitForElement(driver, createAreaModule, 5);
 		createAreaModule.click();
 		return new CreateArea(driver);
 	}
-	public Area clickAreaInJobpage()
+	public Area clickArea()
 	{
 		PageUtility.waitForElement(driver, areaModule, 5);
 		areaModule.click();
 		return new Area(driver);
 	}
-	public JobDetails clickViewButtonOfAccountant()
+	public JobDetails clickView(String job) 
 	{
-		viewButtonOfAccountant.click();
+		if(job=="Accountant")
+		{
+			viewButtonOfAccountant.click();
+		}
+		else if(job=="BusinessAnalyst")
+		{
+			viewButtonOfBusinessAnalyst.click();
+		}
+		else
+		{}
 		return new JobDetails(driver);
 	}
-	public UpdateJobDetails clickUpdateButtonOfAccountant()
+	public UpdateJobDetails clickUpdate(String job)
 	{
-		updateButtonOfAccountant.click();
-		return new UpdateJobDetails(driver);
-		
-	}
-	public JobDetails clickViewButtonOfBusinessAnalyst()
-	{
-		viewButtonOfBusinessAnalyst.click();
-		return new JobDetails(driver);
-	}
-	public UpdateJobDetails clickUpdateButtonOfBusinessAnalyst()
-	{
-		updateButtonOfBusinessAnalyst.click();
+		if(job=="Accountant")
+		{
+			updateButtonOfAccountant.click();
+		}
+		else if(job=="BusinessAnalyst")
+		{
+			updateButtonOfBusinessAnalyst.click();
+		}
+		else
+		{}
 		return new UpdateJobDetails(driver);
 	}
 }

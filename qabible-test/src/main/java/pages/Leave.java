@@ -37,11 +37,11 @@ public class Leave
 	@FindBy(xpath="//*[@id=\"leaveform-worker\"]")
 	WebElement workerDropdownList;
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/select/option[2]")
-	WebElement worker1;
+	WebElement worker1; //Sagar
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/select/option[3]")
-	WebElement worker2;
+	WebElement worker2; //Thomas
 	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/select/option[4]")
-	WebElement worker3;
+	WebElement worker3; //Anil
 	@FindBy(xpath="//*[@id=\"leaveform-reason\"]")
 	WebElement reasonForLeave;
 	@FindBy(xpath="//*[@id=\"w0\"]/div[4]/button")
@@ -56,37 +56,45 @@ public class Leave
 	{
 		return leavePageHeaderText.getText();
 	}
-	public void clickLeaveDaysDropdownInLeavePage()
+	public void clickLeaveDaysDropdown()
 	{
 		PageUtility.waitForElement(driver, leaveDaysDropdown, 5);
 		leaveDaysDropdown.click();
 	}
-	public void clickStartDateOfLeaveForWorker1()
+	public void clickStartDate(String worker)
 	{
-		PageUtility.waitForElement(driver, startDateForLeave_Worker1, 5);
-		startDateForLeave_Worker1.click();
+		if(worker=="Worker1")
+		{
+			PageUtility.waitForElement(driver, startDateForLeave_Worker1, 5);
+			startDateForLeave_Worker1.click();
+		}
+		else if(worker=="Worker2")
+		{
+			PageUtility.waitForElement(driver, startDateForLeave_Worker2, 10);
+			startDateForLeave_Worker2.click();
+		}
+		else {}
 	}
-	public void clickEndDateOfLeaveForWorker1()
+	public void clickEndDate(String worker)
 	{
-		PageUtility.waitForElement(driver, endDateForLeave_Worker1, 10);
-		endDateForLeave_Worker1.click();
+		if(worker=="Worker1")
+		{
+			PageUtility.waitForElement(driver, endDateForLeave_Worker1, 10);
+			endDateForLeave_Worker1.click();
+		}
+		else if(worker=="Worker2")
+		{
+			PageUtility.waitForElement(driver, endDateForLeave_Worker2, 10);
+			endDateForLeave_Worker2.click();
+		}
+		else {}
 	}
-	public void clickStartDateOfLeaveForWorker2()
-	{
-		PageUtility.waitForElement(driver, startDateForLeave_Worker2, 10);
-		startDateForLeave_Worker2.click();
-	}
-	public void clickEndDateOfLeaveForWorker2()
-	{
-		PageUtility.waitForElement(driver, endDateForLeave_Worker2, 10);
-		endDateForLeave_Worker2.click();
-	}
-	public void clickCancelButtonInDatePicker()
+	public void clickCancel()
 	{
 		PageUtility.waitForElement(driver, cancelButtonInDatePicker, 5);
 		cancelButtonInDatePicker.click();
 	}
-	public void clickApplyButtonInDatePicker()
+	public void clickApply()
 	{
 		PageUtility.waitForElement(driver, applyButtonInDatePicker, 5);
 		applyButtonInDatePicker.click();
@@ -96,48 +104,61 @@ public class Leave
 		PageUtility.waitForElement(driver, worker, 10);
 		worker.click();
 	}
-	public String getWorker1()
+	public String getWorker(String worker)
 	{
-		//PageUtility.waitForElement(driver, worker2, 5);
-		return worker1.getText();
+		String wo="";
+		if(worker=="Worker1")
+		{
+			//PageUtility.waitForElementDisplayed(driver, worker1, 15);
+			PageUtility.handleSleep(10000);
+			wo= worker1.getText();
+		}
+		else if(worker=="Worker2")
+		{
+			//PageUtility.waitForElementDisplayed(driver, worker2, 15);
+			PageUtility.handleSleep(10000);
+			wo= worker2.getText();
+		}
+		else if(worker=="Worker3")
+		{
+			//PageUtility.waitForElementDisplayed(driver, worker3, 15);
+			PageUtility.handleSleep(10000);
+			wo= worker3.getText();
+		}
+		else {}
+		return wo;
 	}
-	public String getWorker2()
+	public void clickWorker(String worker)
 	{
-		//PageUtility.waitForElement(driver, worker2, 5);
-		return worker2.getText();
+		if(worker=="Worker1")
+		{
+			PageUtility.waitForElement(driver, worker1, 10);
+			worker1.click();
+		}
+		else if(worker=="Worker2")
+		{
+			PageUtility.waitForElement(driver, worker2, 10);
+			worker2.click();
+		}
+		else if(worker=="Worker3")
+		{
+			PageUtility.waitForElement(driver, worker3, 10);
+			worker3.click();
+		}
+		else {}
 	}
-	public String getWorker3()
-	{
-		//PageUtility.waitForElement(driver, worker3, 5);
-		return worker3.getText();
-	}
-	public void clickWorker1()
-	{
-		PageUtility.waitForElement(driver, worker1, 10);
-		worker1.click();
-	}
-	public void clickWorker2()
-	{
-		PageUtility.waitForElement(driver, worker2, 20);
-		worker2.click();
-	}
-	public void clickWorker3()
-	{
-		PageUtility.waitForElement(driver, worker3, 10);
-		worker3.click();
-	}
-	public void enterReasonForLeave(String reason)
+	public void enterReason(String reason)
 	{
 		PageUtility.waitForElement(driver, reasonForLeave, 5);
 		reasonForLeave.sendKeys(reason);
 	}
-	public Attendance clickSaveButton()
+	public Attendance clickSave()
 	{
 		PageUtility.waitForElement(driver, saveButton, 5);
 		saveButton.click();
 		return new Attendance(driver);
 	}
-	public boolean getWebElementVisibilityInLeavePage()
+	public boolean getWebElementVisibility()
 	{
 		Boolean visibilityOfElement;
 		if(leavePageHeaderText.isDisplayed()&& leaveDaysDropdown.isDisplayed()&& workerLabel.isDisplayed()&&reasonForLeave.isDisplayed()&&saveButton.isDisplayed())

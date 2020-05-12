@@ -23,19 +23,24 @@ public class PayrollDetails
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}	
-	public String getHeaderTextOfPayrollDetailsOfSagar()
+	public String getHeaderTextOfPayrollDetails(String employee)
 	{
-		return headerTextOfPayrollDetails.getText();
+		String header="";
+		if(employee=="Sagar")
+		{
+			header= headerTextOfPayrollDetails.getText();
+		}
+		return header;
 	}
-	public String getEmployeeFullName()
+	public String getFullName()
 	{
 		return workerFullName.getText();
 	}
-	public String getEmployeeBranch()
+	public String getBranch()
 	{
 		return workerBranch.getText();
 	}
-	public UpdatePayrollDetails clickUpdateButtonInPayrollDetailsPage()
+	public UpdatePayrollDetails clickUpdate()
 	{
 		updateButton.click();
 		return new UpdatePayrollDetails(driver);

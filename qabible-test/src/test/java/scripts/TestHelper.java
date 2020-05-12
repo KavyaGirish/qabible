@@ -3,13 +3,20 @@ package scripts;
 
 import org.testng.annotations.BeforeMethod;
 
+import com.google.common.io.Files;
+
+import utilities.GenericUtility;
 import utilities.NotepadUtility;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 
 public class TestHelper 
@@ -29,9 +36,23 @@ public class TestHelper
 	}
 
 	@AfterMethod
-	public void closeBrowser() throws InterruptedException 
+	public void closeBrowser(ITestResult result) throws InterruptedException 
 	{
-		Thread.sleep(5000);
+		if(ITestResult.FAILURE== result.getStatus())
+		{
+			try 
+			{
+				TakesScreenshot screenshot= (TakesScreenshot)driver;
+				File source= screenshot.getScreenshotAs(OutputType.FILE);
+				GenericUtility.copyFileUsingStream(source, new File("./target/"+result.getName()+".png"));
+				System.out.println("Screenshot taken!");
+			}
+			catch(Exception e)
+			{
+				System.out.println("Exception while taking screenshot: "+e.getMessage());
+			}
+		}
+		
 		driver.close();
 	}
 

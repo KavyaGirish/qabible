@@ -27,52 +27,29 @@ public class JobDetails
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}
-	public String getHeaderTextOfJobDetailsPageOfBusinessAnalyst()
+	public String getHeaderText() 
 	{
 		return headerText.getText();
 	}
-	public String getClientOfBusinessAnalyst()
+	public String getClient()
 	{
 		return client.getText();
 	}
-	public String getJobTypeOfBusinessAnalyst()
+	public String getJobType()
 	{
 		return jobType.getText();
 	}
-	public String getPoOfBusinessAnalyst()
+	public String getPo()
 	{
 		return po.getText();
 	}
-	public String getDescriptionOfBusinessAnalyst()
+	public String getDescription()
 	{
 		return description.getText();
 	}
-	public String getDateOfBusinessAnalyst()
+	public String getDate()
 	{
 		return date.getText();
 	}
-	public String getHeaderTextOfJobDetailsPageOfAccountant()
-	{
-		return headerText.getText();
-	}
-	public String getClientOfAccountant()
-	{
-		return client.getText();
-	}
-	public String getJobTypeOfAccountant()
-	{
-		return jobType.getText();
-	}
-	public String getPoOfAccountant()
-	{
-		return po.getText();
-	}
-	public String getDescriptionOfAccountant()
-	{
-		return description.getText();
-	}
-	public String getDateOfAccountant()
-	{
-		return date.getText();
-	}
+	
 }

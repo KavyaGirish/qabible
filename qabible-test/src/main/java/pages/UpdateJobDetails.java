@@ -21,7 +21,7 @@ public class UpdateJobDetails
 	WebElement clientValue;
 	@FindBy(xpath="//*[@id=\"select2-job-client_id-container\"]/span")
 	WebElement clearClientValue;
-	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/div[1]/div/div")
+	@FindBy(xpath="/html/body/div[1]/div/section[2]/div[1]/form/div[2]/div[1]/div/div[contains(@class,'help-block')]")
 	WebElement noClientValueError;
 	@FindBy(xpath="//*[@id=\"w0\"]/div[2]/div[1]/div/span/span[1]/span/span[2]")
 	WebElement clientDropdown;
@@ -52,22 +52,24 @@ public class UpdateJobDetails
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}
-	public String getHeaderTextOfUpdateJobDetailsPageOfAccountant()
+	public String getHeaderText()
 	{
 		return headerText.getText();
 	}
-	public void updateJobTitle()
+	public void enterTitle(String job)
 	{
 		jobTitle.clear();
-		jobTitle.sendKeys("Accountant");
+		jobTitle.sendKeys(job); //"Accountant"
 	}
-	public void clearClientValue()
+	public void clearClient()
 	{
 		PageUtility.waitForElement(driver, clearClientValue, 5);
 		clearClientValue.click();
 	}
-	public boolean checkNoClientErrorDisplayed()
+	public boolean isNoClientErrorDisplayed()
 	{
+		//PageUtility.handleSleep(6000);
+		PageUtility.waitForElementDisplayed(driver, noClientValueError, 6);
 		if(noClientValueError.isDisplayed())
 		{
 			return true;
@@ -82,72 +84,96 @@ public class UpdateJobDetails
 		PageUtility.waitForElement(driver, clientDropdown, 10);
 		clientDropdown.click();
 	}
-	public void clickClientOptionAAA()
+	public void clickClient(String client) 
 	{
-		PageUtility.waitForElement(driver, client_AAA, 5);
-		new Actions(driver).doubleClick(client_AAA);
+		if(client=="AAA")
+		{
+			PageUtility.waitForElement(driver, client_AAA, 5);
+			new Actions(driver).doubleClick(client_AAA);
+		}
+		else if(client=="Client1")
+		{
+			PageUtility.waitForElement(driver, client_Client1, 5);
+			new Actions(driver).doubleClick(client_Client1);
+		}
+		else if(client=="Client2")
+		{
+			PageUtility.waitForElement(driver, client_Client2, 5);
+			new Actions(driver).doubleClick(client_Client2);
+		}
+		else
+		{}
 	}
-	public void clickClientOptionClient1()
+	public String getClient(String client)
 	{
-		PageUtility.waitForElement(driver, client_Client1, 5);
-		new Actions(driver).doubleClick(client_Client1);
-	}
-	public void clickClientOptionClient2()
-	{
-		PageUtility.waitForElement(driver, client_Client2, 5);
-		new Actions(driver).doubleClick(client_Client2);
-	}
-	public String getClientAAA()
-	{
-		PageUtility.waitForElement(driver, client_AAA, 5);
-		return client_AAA.getText();
-	}
-	public String getClient1()
-	{
-		PageUtility.waitForElement(driver, client_Client1, 5);
-		return client_Client1.getText();
-	}
-	public String getClient2()
-	{
-		PageUtility.waitForElement(driver, client_Client2, 5);
-		return client_Client2.getText();
+		String cl="";
+		if(client=="AAA")
+		{
+			PageUtility.waitForElementDisplayed(driver, client_AAA, 5);
+			cl= client_AAA.getText();
+		}
+		else if(client=="Client1")
+		{
+			PageUtility.waitForElementDisplayed(driver, client_Client1, 5);
+			cl= client_Client1.getText();
+		}
+		else if(client=="Client2")
+		{
+			PageUtility.waitForElementDisplayed(driver, client_Client2, 5);
+			cl= client_Client2.getText();
+		}
+		else
+		{}
+		return cl;
 	}
 	public void clickJobType()
 	{
 		PageUtility.waitForElement(driver, jobType, 20);
 		jobType.click();
 	}
-	public void clickJobTypeNormal()
+	public void clickJobType(String type)
 	{
-		PageUtility.waitForElement(driver, jobType_Normal, 20);
-		jobType_Normal.click();
+		if(type=="Normal")
+		{
+			PageUtility.waitForElement(driver, jobType_Normal, 20);
+			jobType_Normal.click();
+		}
+		else if (type=="Overtime")
+		{
+			PageUtility.waitForElement(driver, jobType_Overtime, 20);
+			jobType_Overtime.click();
+		}
+		else
+		{}
 	}
-	public void clickJobTypeOvertime()
+	public String getJobType(String jobtype)
 	{
-		PageUtility.waitForElement(driver, jobType_Overtime, 20);
-		jobType_Overtime.click();
+		String job="";
+		if(jobtype=="Normal")
+		{
+			job= jobType_Normal.getText();
+		}
+		else if(jobtype=="Overtime")
+		{
+			job= jobType_Overtime.getText();
+		} 
+		else
+		{}
+		return job;
 	}
-	public String getJobType_Normal()
-	{
-		return jobType_Normal.getText();
-	}
-	public String getJobType_Overtime()
-	{
-		return jobType_Overtime.getText();
-	}
-	public void updatePoOfAccountant()
+	public void enterPo(String poUpdate)
 	{
 		PageUtility.waitForElement(driver, po, 20);
 		po.clear();
-		po.sendKeys("xyz");
+		po.sendKeys(poUpdate);
 	}
-	public void updateDescriptionOfAccountant()
+	public void enterDescription(String desc)
 	{
 		PageUtility.waitForElement(driver, description, 20);
 		description.clear();
-		description.sendKeys("Accounting");
+		description.sendKeys(desc);
 	}
-	public Job clickSaveButton()
+	public Job clickSave()
 	{
 		saveButton.click();
 		return new Job(driver);

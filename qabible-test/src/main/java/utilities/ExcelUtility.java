@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -29,6 +31,15 @@ public class ExcelUtility
 		return sheet.getLastRowNum();
 	}
 	
+	public static int getColumnCount(String path, String sheetName) throws IOException
+	{
+		file= new FileInputStream(new File(path));
+		work= new XSSFWorkbook(file);
+		sheet= work.getSheet(sheetName);
+		
+		return sheet.getRow(0).getLastCellNum();	
+	}
+		
 	public static String readExcelCellData(String path, String sheetName, int i, int j) throws IOException
 	{
 		String cellValue="";

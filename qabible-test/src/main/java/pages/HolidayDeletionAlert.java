@@ -12,12 +12,12 @@ public class HolidayDeletionAlert
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}
-	public HolidayDetails dismissAlertBoxForHolidayDeletion()
+	public HolidayDetails dismiss()
 	{
 		driver.switchTo().alert().dismiss();
 		return new HolidayDetails(driver);
 	}
-	public Holiday acceptAlertBoxForHolidayDeletion()
+	public Holiday accept()
 	{
 		driver.switchTo().alert().accept();
 		return new Holiday(driver);

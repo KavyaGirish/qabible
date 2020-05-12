@@ -23,7 +23,7 @@ public class Holiday
 	WebElement updateButtonOfHoliday2;
 	@FindBy(xpath="//*[@id=\"w0\"]/table/tbody/tr[10]/td[7]/a[3]")
 	WebElement deleteButtonOfHoliday2;
-	@FindBy(xpath="//*[@id=\"w0\"]/table/tbody/tr[11]/td[7]/a[3]/span")
+	@FindBy(xpath="//*[@id=\"w0\"]/table/tbody/tr[12]/td[7]/a[3]")
 	WebElement deleteButtonOfHoliday3;
 	
 	
@@ -36,37 +36,49 @@ public class Holiday
 	{
 		return holidayPageHeaderText.getText();
 	}
-	public CreateHoliday clickCreateHolidayButton()
+	public CreateHoliday clickCreateHoliday()
 	{
 		PageUtility.waitForElement(driver, createHolidayButton, 5);
 		createHolidayButton.click();
 		return new CreateHoliday(driver);
 	}
-	public HolidayDetails clickViewButtonOfHoliday2()	
+	public HolidayDetails clickView(String holiday)	
 	{
-		PageUtility.waitForElement(driver, viewButtonOfHoliday2, 5);
-		viewButtonOfHoliday2.click();
+		if(holiday=="Holiday2")
+		{
+			PageUtility.waitForElementClicked(driver, viewButtonOfHoliday2, 5);
+			viewButtonOfHoliday2.click();
+		}
+		else 
+		{}
 		return new HolidayDetails(driver);
 	}
-	public UpdateHolidayDetails clickUpdateButtonOfHoliday2()
+	public UpdateHolidayDetails clickUpdate(String holiday)
 	{
-		PageUtility.waitForElement(driver, updateButtonOfHoliday2, 5);
-		updateButtonOfHoliday2.click();
+		if(holiday=="Holiday2")
+		{
+			PageUtility.waitForElement(driver, updateButtonOfHoliday2, 5);
+			updateButtonOfHoliday2.click();
+		}
 		return new UpdateHolidayDetails(driver);
 	}
-	public HolidayDeletionAlert clickDeleteButtonOfHoliday2()
+	public HolidayDeletionAlert clickDelete(String holiday)
 	{
-		PageUtility.waitForElement(driver, deleteButtonOfHoliday2, 5);
-		deleteButtonOfHoliday2.click();
+		if(holiday=="Holiday2")
+		{
+			PageUtility.waitForElement(driver, deleteButtonOfHoliday2, 5);
+			deleteButtonOfHoliday2.click();
+		}
+		else if(holiday=="Holiday3")
+		{
+			PageUtility.waitForElement(driver, deleteButtonOfHoliday3, 5);
+			deleteButtonOfHoliday3.click();
+		}
+		else
+		{}
 		return new HolidayDeletionAlert(driver);
 	}
-	public HolidayDeletionAlert clickDeleteButtonOfHoliday3()
-	{
-		PageUtility.waitForElement(driver, deleteButtonOfHoliday3, 5);
-		deleteButtonOfHoliday3.click();
-		return new HolidayDeletionAlert(driver);
-	}
-	public boolean getWebElementsVisiblityInHolidayPage()
+	public boolean getWebElementsVisibility()
 	{
 		Boolean visibilityOfElement;
 		if(holidayPageHeaderText.isDisplayed()&& createHolidayButton.isDisplayed()&& tableContainingHolidays.isDisplayed())

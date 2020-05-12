@@ -16,6 +16,7 @@ public class Report
 	
 	@FindBy(xpath="/html/body/div/div/section[1]/h1")
 	WebElement reportPageHeadeText;
+	
 	@FindBy(xpath="//*[@id=\"attendanceform-date-kvdate\"]/span[1]/i")
 	WebElement monthYearPicker;
 	@FindBy(xpath="/html/body/div[2]/div[2]/table/tbody/tr/td/span[1]")
@@ -28,16 +29,33 @@ public class Report
 	WebElement april2020;
 	@FindBy(xpath="/html/body/div[2]/div[2]/table/tbody/tr/td/span[5]")
 	WebElement may2020;
+	@FindBy(xpath="/html/body/div[2]/div[2]/table/tbody/tr/td/span[6]")
+	WebElement june2020;
+	@FindBy(xpath="/html/body/div[2]/div[2]/table/tbody/tr/td/span[7]")
+	WebElement july2020;
+	@FindBy(xpath="/html/body/div[2]/div[2]/table/tbody/tr/td/span[8]")
+	WebElement august2020;
+	@FindBy(xpath="/html/body/div[2]/div[2]/table/tbody/tr/td/span[9]")
+	WebElement september2020;
+	@FindBy(xpath="/html/body/div[2]/div[2]/table/tbody/tr/td/span[10]")
+	WebElement october2020;
+	@FindBy(xpath="/html/body/div[2]/div[2]/table/tbody/tr/td/span[11]")
+	WebElement november2020;
+	@FindBy(xpath="/html/body/div[2]/div[2]/table/tbody/tr/td/span[12]")
+	WebElement december2020;
+	
 	@FindBy(xpath="//*[@id=\"attendanceform-date-kvdate\"]/span[2]/i")
 	WebElement clearMonthYear;
 	@FindBy(xpath="//*[@id=\"attendanceform-date\"]")
 	WebElement textMonthYear;
+	
 	@FindBy(xpath="//*[@id=\"w0\"]/div[2]/div/button")
 	WebElement findButton;
 	@FindBy(xpath="/html/body/div/div/section[2]/div/div[1]/div[2]/div/div/ul/li/a")
 	WebElement downloadAttendanceOfMonthButton;
 	@FindBy(xpath="//*[@id=\"w3-container\"]/table")
 	WebElement tableContainingAttendances;
+	
 	@FindBy(xpath="/html/body/div[3]/div/div/div[3]/div/div/button[1]")
 	WebElement cancelButtonInAlertBox;
 	@FindBy(xpath="/html/body/div[3]/div/div/div[3]/div/div/button[2]")
@@ -48,7 +66,7 @@ public class Report
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}
-	public boolean getWebElementsVisiblityInReportPage()
+	public boolean getWebElementsVisiblity()
 	{
 		Boolean visibilityOfElement;
 		if(reportPageHeadeText.isDisplayed()&& monthYearPicker.isDisplayed()&& clearMonthYear.isDisplayed()&& textMonthYear.isDisplayed()&&findButton.isDisplayed()&&downloadAttendanceOfMonthButton.isDisplayed()&&tableContainingAttendances.isDisplayed())
@@ -75,57 +93,91 @@ public class Report
 	{
 		monthYearPicker.click();
 	}
-	public void clickJanuary2020()
+	public void clickMonth(String monthYear)
 	{
-		january2020.click();
+		if(monthYear=="January2020")
+		{
+			january2020.click();
+		}
+		else if(monthYear=="February2020")
+		{
+			february2020.click();
+		}
+		else if(monthYear=="March2020")
+		{
+			march2020.click();
+		}
+		else if(monthYear=="April2020")
+		{
+			april2020.click();
+		}
+		else if(monthYear=="May2020")
+		{
+			may2020.click();
+		}
+		else if(monthYear=="June2020")
+		{
+			june2020.click();
+		}
+		else if(monthYear=="July2020")
+		{
+			july2020.click();
+		}
+		else if(monthYear=="August2020")
+		{
+			august2020.click();
+		}
+		else if(monthYear=="September2020")
+		{
+			september2020.click();
+		}
+		else if(monthYear=="October2020")
+		{
+			october2020.click();
+		}
+		else if(monthYear=="November2020")
+		{
+			november2020.click();
+		}
+		else if(monthYear=="December2020")
+		{
+			december2020.click();
+		}
+		else
+		{}
 	}
-	public void clickFebruary2020()
-	{
-		february2020.click();
-	}
-	public void clickMarch2020()
-	{
-		march2020.click();
-	}
-	public void clickApril2020()
-	{
-		april2020.click();
-	}
-	public void clickMay2020()
-	{
-		may2020.click();
-	}
-	public void clickClearMonthYearPicked()
+	public void clickClearMonthYear()
 	{
 		clearMonthYear.click();
 	}
-	public String getMonthYearPicked()
+	public String getMonthYear()
 	{
 		return textMonthYear.getText();
 	}
-	public void clickFindButton()
+	public void clickFind()
 	{
 		PageUtility.waitForElement(driver, findButton, 10);
 		findButton.click();
 	}
 	
-	public void clickDownloadAttendanceOfTheMonthButton()
+	public void clickDownloadAttendanceOfTheMonth()
 	{
-		PageUtility.waitForElement(driver, downloadAttendanceOfMonthButton, 10);
+		PageUtility.waitForElementClicked(driver, downloadAttendanceOfMonthButton, 20);
 		downloadAttendanceOfMonthButton.click();
 	}
-	public void clickCancelButtonInAlertBox()
+	public void clickCancel()
 	{
-		PageUtility.waitForElement(driver, cancelButtonInAlertBox, 20);
+		PageUtility.waitForAlert(driver, cancelButtonInAlertBox, 15);
 		cancelButtonInAlertBox.click();
 	}
-	public void clickOkButtonInAlertBox()
+	public void clickOk()
 	{
-		PageUtility.waitForElement(driver, okButtonInAlertBox, 20);
+		PageUtility.waitForAlert(driver, okButtonInAlertBox, 15);
 		okButtonInAlertBox.click();
 	}
 	public boolean isAttendanceReportDownloaded(String downloadPath, String extension)
 	{
+		PageUtility.handleSleep(10000);
 		boolean statusOfDownload= false;
 		File downloadsFolder = new File(downloadPath);
     	File[] files = downloadsFolder.listFiles();

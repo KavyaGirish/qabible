@@ -43,13 +43,13 @@ public class Area
 	{
 		return areaPageHeaderText.getText();
 	}
-	public CreateArea clickCreateAreaButtonInAreaPage()
+	public CreateArea clickCreateArea()
 	{
 		PageUtility.waitForElement(driver, createAreaButton, 5);
 		createAreaButton.click();
 		return new CreateArea(driver);
 	}
-	public String getNameOfCreatedAreaInAreaPage()
+	public String getName() //of created area
 	{
 		List<WebElement> rowsOfTableCreatedAreas= columnAreasOfTableAreaCreatedInAreaPage;
 		int countOfAreasCreated= rowsOfTableCreatedAreas.size();
@@ -57,43 +57,50 @@ public class Area
 		String newlyCreatedJob= rowsOfTableCreatedAreas.get(countOfAreasCreated-1).getText();
 		return newlyCreatedJob;
 	}
-	public AreaDetails clickViewButtonForArea1InAreaPage()
+	public AreaDetails clickView(String area) //area1
 	{
-		PageUtility.waitForElement(driver, viewArea1InAreaPage, 5);
-		viewArea1InAreaPage.click();
+		if(area=="Area1")
+		{
+			PageUtility.waitForElement(driver, viewArea1InAreaPage, 5);
+			viewArea1InAreaPage.click();
+		}
+		else if(area=="Area2")
+		{
+			PageUtility.waitForElement(driver, viewArea2InAreaPage, 5);
+			viewArea2InAreaPage.click();
+		}
+		else if(area=="XYZ")
+		{
+			PageUtility.waitForElement(driver, viewXYZInAreaPage, 5);
+			viewXYZInAreaPage.click();
+		}
+		else
+		{}
 		return new AreaDetails(driver);
 	}
-	public AreaDetails clickViewButtonForArea2InAreaPage()
+	
+	public UpdateAreaDetails clickUpdate(String area) //change as above
 	{
-		PageUtility.waitForElement(driver, viewArea2InAreaPage, 5);
-		viewArea2InAreaPage.click();
-		return new AreaDetails(driver);
-	}
-	public AreaDetails clickViewButtonForXYZInAreaPage()
-	{
-		PageUtility.waitForElement(driver, viewXYZInAreaPage, 5);
-		viewXYZInAreaPage.click();
-		return new AreaDetails(driver);
-	}
-	public UpdateAreaDetails clickUpdateButtonForArea1InAreaPage()
-	{
-		PageUtility.waitForElement(driver, updateArea1InAreaPage, 5);
-		updateArea1InAreaPage.click();
+		if(area=="Area1")
+		{
+			PageUtility.waitForElement(driver, updateArea1InAreaPage, 5);
+			updateArea1InAreaPage.click();
+		}
+		else if(area=="Area2")
+		{
+			PageUtility.waitForElement(driver, updateArea2InAreaPage, 5);
+			updateArea2InAreaPage.click();
+		}
+		else if(area=="XYZ")
+		{
+			PageUtility.waitForElement(driver, updateXYZInAreaPage, 5);
+			updateXYZInAreaPage.click();
+		}
+		else {}
 		return new UpdateAreaDetails(driver);
 	}
-	public UpdateAreaDetails clickUpdateButtonForArea2InAreaPage()
-	{
-		PageUtility.waitForElement(driver, updateArea2InAreaPage, 5);
-		updateArea2InAreaPage.click();
-		return new UpdateAreaDetails(driver);
-	}
-	public UpdateAreaDetails clickUpdateButtonForXYZInAreaPage()
-	{
-		PageUtility.waitForElement(driver, updateXYZInAreaPage, 5);
-		updateXYZInAreaPage.click();
-		return new UpdateAreaDetails(driver);
-	}
-	public boolean getWebElementsVisiblityInAreaPage()
+	
+	public boolean getWebElementsVisibility()
 	{
 		Boolean visibilityOFElement;
 		if(areaPageHeaderText.isDisplayed()&& createAreaButton.isDisplayed()&& tableContainingAreaDetails.isDisplayed())

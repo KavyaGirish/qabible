@@ -28,23 +28,23 @@ public class UpdateAreaDetails
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}
-	public String getHeaderTextOfUpdateAreaDetailsPage()
+	public String getHeaderText()
 	{
 		return updateAreaDetailsPageHeaderText.getText();
 	}
-	public void enterUpdatedValueForName(String updatedName)
+	public void enterName(String updatedName)
 	{
 		PageUtility.waitForElement(driver, updatedNameOfArea, 5);
 		updatedNameOfArea.clear();
 		updatedNameOfArea.sendKeys(updatedName);
 	}
-	public void enterUpdatedValueForDescription(String updatedDescription)
+	public void enterDescription(String updatedDescription)
 	{
 		PageUtility.waitForElement(driver, updatedDescriptionOfArea, 5);
 		updatedDescriptionOfArea.clear();
 		updatedDescriptionOfArea.sendKeys(updatedDescription);
 	}
-	public AreaDetails clickSaveButtonInUpdateAreaDetailsPage()
+	public AreaDetails clickSave()
 	{
 		PageUtility.waitForElement(driver, saveButton, 5);
 		saveButton.click();

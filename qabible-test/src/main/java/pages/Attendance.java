@@ -52,7 +52,7 @@ public class Attendance
 	{
 		return attendanceHeaderText.getText();
 	}
-	public boolean getWebElementsVisibilityInAttendancePageLoaged()
+	public boolean getWebElementsVisibility()
 	{
 		Boolean visibilityOFElement;
 		if(attendanceHeaderText.isDisplayed() && textDate.isDisplayed() && datePickerButton.isDisplayed() && closeButton.isDisplayed() && textFieldEnterDate.isDisplayed() && startButton.isDisplayed())
@@ -71,69 +71,59 @@ public class Attendance
 		PageUtility.waitForElement(driver, branchDropdown, 5);
 		branchDropdown.click();
 	}
-	public String getBranchValueBanglore()
+	public String getBranch(String branch)
 	{
-		return branchBanglore.getText();
-	}
-	public String getBranchValueBhopal()
-	{
-		return branchBhopal.getText();
-	}
-	/*
-	public String[] getBranchValue()
-	{
-		Select select= new Select(branchDropdown);
-		List<WebElement> branch= select.getOptions();
-		String br[] = new String[branch.size()];
-		for(int i=0;i<branch.size();i++)
+		String br="";
+		if(branch=="Banglore")
 		{
-			br[i]= branch.get(i).getText();
+			br= branchBanglore.getText();
 		}
+		else if(branch=="Bhopal")
+		{
+			br= branchBhopal.getText();
+		}
+		else {}
 		return br;
 	}
-	*/
-	public void clickBranchValueBanglore()
+	public void clickBranchValueBanglore(String branch)
 	{
-		PageUtility.waitForElement(driver, branchDropdown, 5);
-		Select select= new Select(branchDropdown);
-		select.selectByVisibleText("Banglore");
+		if(branch=="Banglore")
+		{
+			PageUtility.waitForElement(driver, branchBanglore, 5);
+			branchBanglore.click();
+		}
+		else if(branch=="Bhopal")
+		{
+			PageUtility.waitForElement(driver, branchBhopal, 5);
+			branchBhopal.click();
+		}
+		else {}
 	}
-	public void clickBranchValueBhopal()
-	{
-		PageUtility.waitForElement(driver, branchDropdown, 5);
-		Select select= new Select(branchDropdown);
-		select.selectByVisibleText("Bhopal");
-	}
-	public String getBranchValueWhenBranchIsSelected()
-	{
-		String branchValue= new Select(branchDropdown).getFirstSelectedOption().getText();
-		return branchValue;	
-	}
-	public AttendanceCreate clickCreateAttendanceInAttendancePage()
+	public AttendanceCreate clickCreateAttendance()
 	{
 		PageUtility.waitForElement(driver, attendanceCreate, 5);
 		attendanceCreate.click();
 		return new AttendanceCreate(driver);
 	}
-	public Report clickReportInAttendancePage()
+	public Report clickReport()
 	{
 		PageUtility.waitForElement(driver, report, 5);
 		report.click();
 		return new Report(driver);
 	}
-	public Leave clickLeaveInAttendancePage()
+	public Leave clickLeave()
 	{
 		PageUtility.waitForElement(driver, leave, 5);
 		leave.click();
 		return new Leave(driver);
 	}
-	public Holiday clickHolidayInAttendancePage()
+	public Holiday clickHoliday()
 	{
 		PageUtility.waitForElement(driver, holiday, 5);
 		holiday.click();
 		return new Holiday(driver);
 	}
-	public Payroll clickPayrollInAttendancePage()
+	public Payroll clickPayroll()
 	{
 		PageUtility.waitForElement(driver, payroll, 5);
 		payroll.click();

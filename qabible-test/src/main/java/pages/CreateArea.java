@@ -29,23 +29,23 @@ public class CreateArea
 	{
 		return createAreaPageHeaderText.getText();
 	}
-	public void enterValueForNameInCreateAreaPage(String name)
+	public void enterName(String name)
 	{
 		PageUtility.waitForElement(driver, fieldNameInCreateAreaPage, 5);
 		fieldNameInCreateAreaPage.sendKeys(name);
 	}
-	public void enterValueForDescriptionInCreateAreaPage(String description)
+	public void enterDescription(String description)
 	{
 		PageUtility.waitForElement(driver, fieldNameInCreateAreaPage, 5);
 		fieldDescriptionInCreateAreaPage.sendKeys(description);
 	}
-	public AreaDetails clickSaveButtonInCreateAreaPage()
+	public AreaDetails clickSave()
 	{
 		PageUtility.waitForElement(driver, buttonSave, 5);
 		buttonSave.click();
 		return new AreaDetails(driver);
 	}
-	public boolean getWebElementsVisibilityInCreateAreaPage()
+	public boolean getWebElementsVisibility()
 	{
 		Boolean visibilityOfElement;
 		if(createAreaPageHeaderText.isDisplayed()&& fieldNameInCreateAreaPage.isDisplayed()&& fieldDescriptionInCreateAreaPage.isDisplayed()&&buttonSave.isDisplayed())

@@ -113,7 +113,7 @@ public class Payroll
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}	
-	public boolean getWebElementsVisiblityInPayrollPage()
+	public boolean getWebElementsVisiblity()
 	{
 		boolean visibilityOfElement;
 		if(payrollPageHeaderText.isDisplayed()&& monthYearPicker.isDisplayed()&& clearMonthYear.isDisplayed()&& textMonthYear.isDisplayed()&&findButton.isDisplayed()&&colsDropdown.isDisplayed()&&exportAllDropdown.isDisplayed()&&tableContainingPayrollDetails.isDisplayed())
@@ -140,7 +140,7 @@ public class Payroll
 		PageUtility.waitForElement(driver, colsDropdown, 10);
 		colsDropdown.click();
 	}
-	public void clickToggleAllCheckBoxInColumnsDropdown()
+	public void clickToggleAll()	//checkbox
 	{
 		PageUtility.waitForElement(driver, toggleAll_ColsDropdown, 15);
 		toggleAll_ColsDropdown.click();
@@ -169,38 +169,52 @@ public class Payroll
 	{
 		exportAllDropdown.click();
 	}
-	public String getOptionHTMLFromExportAll()
+	public String getOptionOfExportAll(String option)
 	{
-		return HTML_ExportAll.getText();
+		String op="";
+		if(option=="HTML")
+		{
+			op= HTML_ExportAll.getText();
+		}
+		else if(option=="CSV")
+		{
+			op= CSV_ExportAll.getText();
+		}
+		else if(option=="Text")
+		{
+			op= text_ExportAll.getText();
+		}
+		else if(option=="PDF")
+		{
+			op= PDF_ExportAll.getText();
+		}
+		else if(option=="Excel95")
+		{
+			op= excel95_ExportAll.getText();
+		}
+		else if(option=="Excel2007")
+		{
+			op= excel2007_ExportAll.getText();
+		}
+		else
+		{}
+		return op;
 	}
-	public String getOptionCSVFromExportAll()
+	
+	public PayrollDetails clickView(String employee)
 	{
-		return CSV_ExportAll.getText();
-	}
-	public String getOptionTextFromExportAll()
-	{
-		return text_ExportAll.getText();
-	}
-	public String getOptionPDFFromExportAll()
-	{
-		return PDF_ExportAll.getText();
-	}
-	public String getOptionExcel95FromExportAll()
-	{
-		return excel95_ExportAll.getText();
-	}
-	public String getOptionExcel2007FromExportAll()
-	{
-		return excel2007_ExportAll.getText();
-	}
-	public PayrollDetails clickViewButtonOfEmployeeSagar()
-	{
-		viewPayrollButtonOfSagar.click();
+		if(employee=="Sagar")
+		{
+			viewPayrollButtonOfSagar.click();
+		}
 		return new PayrollDetails(driver);
 	}
-	public UpdatePayrollDetails clickUpdateButtonOfEmployeeSagar()
+	public UpdatePayrollDetails clickUpdate(String employee)
 	{
-		updatePayrollButtonOfSagar.click();
+		if(employee=="Sagar")
+		{
+			updatePayrollButtonOfSagar.click();
+		}
 		return new UpdatePayrollDetails(driver);
 	}
 }

@@ -27,18 +27,22 @@ public class AttendanceDetails
 	{
 		return attendanceDetailsPageHeaderText.getText();
 	}
-	public void clickSelectExcelFileButton()
+	public void clickSelectExcelFile()
 	{
 		selectExcelFileButton.click();
 	}
-	public AttendanceMarkWindow clickAttendanceMarkButtonForEmployee1()
+	public AttendanceMarkWindow clickAttendanceMark(String employee)
 	{
-		attendanceMarkForEmployee1.click();
-		return new AttendanceMarkWindow(driver);
-	}
-	public AttendanceMarkWindow clickAttendanceMarkButtonForEmployee2()
-	{
-		attendanceMarkForEmployee2.click();
+		if(employee=="Employee1")
+		{
+			attendanceMarkForEmployee1.click();
+		}
+		else if(employee=="Employee2")
+		{
+			attendanceMarkForEmployee2.click();
+		}
+		else
+		{}
 		return new AttendanceMarkWindow(driver);
 	}
 	

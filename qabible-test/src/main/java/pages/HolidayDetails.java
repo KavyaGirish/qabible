@@ -32,33 +32,33 @@ public class HolidayDetails
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}
-	public String getHolidayDateInHolidayDetailsPage()
+	public String getDate()
 	{
 		return holidayDate.getText();
 	}
-	public String getHolidayTitleInHolidayDetailsPage()
+	public String getTitle()
 	{
 		return holidayTitle.getText();
 	}
-	public String getBranchInHolidayDetailsPage()
+	public String getBranch()
 	{
 		return branch.getText();
 	}
-	public String getHolidayDescriptionInHolidayDetailsPage()
+	public String getDescription()
 	{
 		return holidayDescription.getText();
 	}
-	public String getHolidayStatusInHolidayDetailsPage()
+	public String getStatus()
 	{
 		return holidayStatus.getText();
 	}
-	public UpdateHolidayDetails clickUpdateButtonInHolidayDetailsPage()
+	public UpdateHolidayDetails clickUpdate()
 	{
 		PageUtility.waitForElement(driver, updateButton, 5);
 		updateButton.click();
 		return new UpdateHolidayDetails(driver);
 	}
-	public HolidayDeletionAlert clickDeleteButtonInHolidayDetailsPage()
+	public HolidayDeletionAlert clickDelete()
 	{
 		PageUtility.waitForElement(driver, deleteButton, 5);
 		deleteButton.click();

@@ -35,7 +35,7 @@ public class Homepage
 	{
 		userDropdown.click();
 	}
-	public void clickLogOutButton()
+	public void clickLogOut()
 	{
 		logOutButton.click();
 	}

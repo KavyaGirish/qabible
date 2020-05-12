@@ -28,19 +28,19 @@ public class AreaDetails
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
 	}
-	public String getHeaderTextOfAreaDetailsPage()
+	public String getHeaderText()
 	{
 		return areaDetailsPageHeaderText.getText();
 	}
-	public String getNameOfCreatedArea()
+	public String getName()
 	{
 		return nameOfArea.getText();
 	}
-	public String getDescriptionOfCreatedArea()
+	public String getDescription()
 	{
 		return descriptionOfArea.getText();
 	}
-	public UpdateAreaDetails clickUpdateButtonInAreaDetailsPage()
+	public UpdateAreaDetails clickUpdate()
 	{
 		PageUtility.waitForElement(driver, updateButton, 5);
 		updateButton.click();
