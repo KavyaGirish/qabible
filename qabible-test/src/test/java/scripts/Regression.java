@@ -68,12 +68,11 @@ public class Regression extends TestHelper
 			credentials[k][1]=  ExcelUtility.readExcelCellData(path, sheet, i, 1);
 			k++;
 		}
-		//System.out.println(k);
 		return credentials; 
 	}
 	
 	@Test(dataProvider= "loginCredentials")
-	public void verifyLogin(String username, String password) throws IOException
+	public void verifyLogin(String username, String password)
 	{
 		String expectedPageHeader= "ERP | Dashboard";
 		
@@ -86,13 +85,10 @@ public class Regression extends TestHelper
 		assertEquals(actualPageHeader, expectedPageHeader, "Homepage Launches!");
 	}
 	
-	//@Test
-	public void verifyValidLogin() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyValidLogin(String username, String password)
 	{
 		String expectedPageHeader= "ERP | Dashboard";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -101,36 +97,23 @@ public class Regression extends TestHelper
 		assertEquals(actualPageHeader, expectedPageHeader, "Homepage Launches!");
 	}
 	
-	//@Test 
-	public void verifyInvalidLogin() throws IOException, InterruptedException, NullPointerException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyInvalidLogin(String username, String password) 
 	{
-		
 		String expectedErrorMessage= "Please fix the following errors:";
-		int rowCount= ExcelUtility.getRowCount(path, sheet);
 		
-		for(int i=2; i<rowCount; i++)
-		{
-			String username= ExcelUtility.readExcelCellData(path,sheet,i,0);
-			String password= ExcelUtility.readExcelCellData(path,sheet,i,1);
+		Login login= new Login(driver);
+		login.clearTextFields();	
+		login.login(username,password);
 			
-			Login login= new Login(driver);
-			login.clearTextFields();
-			
-			login.login(username,password);
-			
-			String actualErrorMessage= login.getErrorMessage();
-			assertEquals(actualErrorMessage, expectedErrorMessage, "Login fails!");
-		}	
+		String actualErrorMessage= login.getErrorMessage();
+		assertEquals(actualErrorMessage, expectedErrorMessage, "Login fails!");
 	}	
 	
-	//@Test
-	public void verifyTooltipTextOfJobsModuleInDashboard() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyTooltipTextOfJobsModuleInDashboard(String username, String password) 
 	{
-		
 		String expectedTooltip= "Jobs";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -140,13 +123,9 @@ public class Regression extends TestHelper
 		assertEquals(actualTooltip, expectedTooltip, "Tooltip!");
 	}
 	
-	//@Test 
-	public void verifyUserIsAbleToSeeOptionsOfJobsModuleInDashboard() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToSeeOptionsOfJobsModuleInDashboard(String username, String password) 
 	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		String expectedOption1="Attendance";
 		String expectedOption2="Job";
 		
@@ -161,44 +140,33 @@ public class Regression extends TestHelper
 		assertEquals(actualOption2, expectedOption2, "Job Option!");
 	}
 	
-	//@Test
-	public void verifyAttendancePageIsLoaded() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyAttendancePageIsLoaded(String username, String password) 
 	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
-		homepage.clickModuleJobsInDashboard();
 		
+		homepage.clickModuleJobsInDashboard();
 		Attendance attendance= homepage.clickOptionAttendanceFromJobsModule();
 		
 		assertTrue(attendance.getWebElementsVisibility(), "Attendance Page Is Loaded");
 	}
 	
-	//@Test
-	public void verifyJobPageIsLoaded() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyJobPageIsLoaded(String username, String password) 
 	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
-		homepage.clickModuleJobsInDashboard();
 		
+		homepage.clickModuleJobsInDashboard();
 		Job job= homepage.clickOptionJobFromJobsModule();
 		
 		assertTrue(job.getWebElementsVisibility(), "Job page is loaded!");
 	}
 
-	//@Test
-	public void verifyCreateAreaPageIsLoaded() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyCreateAreaPageIsLoaded(String username, String password) 
 	{
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
 		
@@ -209,13 +177,9 @@ public class Regression extends TestHelper
 		assertTrue(createArea.getWebElementsVisibility(), "Create Area Page is loaded!");
 	}
 	
-	//@Test 
-	public void verifyUserIsAbleToCreateAndUpdateAreaInCreateAreaPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToCreateAndUpdateAreaInCreateAreaPage(String username, String password) 
 	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		String expectedName= "Area for Test!";
 		String expectedDescription= "Area for Test!";
 		
@@ -243,28 +207,22 @@ public class Regression extends TestHelper
 		assertEquals(actualDescription, expectedDescription);
 	}
 	
-	//@Test
-	public void verifyAreaPageIsLoaded() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyAreaPageIsLoaded(String username, String password) 
 	{
-			String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-			String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
+		Login login= new Login(driver);
+		Homepage homepage= login.login(username,password);
 			
-			Login login= new Login(driver);
-			Homepage homepage= login.login(username,password);
+		homepage.clickModuleJobsInDashboard();
+		Job job= homepage.clickOptionJobFromJobsModule();
+		Area area= job.clickArea();
 			
-			homepage.clickModuleJobsInDashboard();
-			Job job= homepage.clickOptionJobFromJobsModule();
-			Area area= job.clickArea();
-			
-			assertTrue(area.getWebElementsVisibility(), "Create Area Page is loaded!");
+		assertTrue(area.getWebElementsVisibility(), "Create Area Page is loaded!");
 	}
 	
-	//@Test
-	public void verifyUserIsAbleToViewDetailsOfExistingAreaInAreaPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToViewDetailsOfExistingAreaInAreaPage(String username, String password) 
 	{
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		String expectedName= "Area1";
 		String expectedDescription= "Area1 for Test!";
 		
@@ -282,16 +240,11 @@ public class Regression extends TestHelper
 		
 		assertEquals(actualName, expectedName, "Description of Area1!");
 		assertEquals(actualDescription, expectedDescription, "Name of Area1!");
-		
 	}
 	
-	//@Test 
-	public void verifyUserIsAbleToUpdateDetailsOfAnAreaInAreaPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToUpdateDetailsOfAnAreaInAreaPage(String username, String password)
 	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		String expectedName= "Area1";
 		String expectedDescription= "Area1 for Test!";
 		
@@ -316,12 +269,9 @@ public class Regression extends TestHelper
 		assertEquals(actualDescription, expectedDescription, "Description of Area1!");	
 	}
 	
-	//@Test
-	public void verifyHolidayPageIsLoaded() throws IOException	
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyHolidayPageIsLoaded(String username, String password) 	
 	{
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
 			
@@ -332,13 +282,9 @@ public class Regression extends TestHelper
 		assertTrue(holiday.getWebElementsVisibility(), "Holiday page is loaded!");
 	}
 	
-	//@Test 
-	public void verifyUserIsAbleToCreateHolidayInHolidayPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToCreateHolidayInHolidayPage(String username, String password) 
 	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		String expectedDate= GenericUtility.getCurrentDate();
 		String expectedTitle= "Holiday1";
 		String expectedBranch= "Tvmm";
@@ -378,13 +324,9 @@ public class Regression extends TestHelper
 		assertEquals(actualStatus, expectedStatus);
 	}
 	
-	//@Test 
-	public void verifyUserIsAbleToUpdateAnExistingHolidayInHolidayPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToUpdateAnExistingHolidayInHolidayPage(String username, String password) 
 	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		String expectedTitle= "Holiday2";
 		String expectedBranch= "All";
 		String expectedDescription= "Holiday2 updated";
@@ -423,14 +365,9 @@ public class Regression extends TestHelper
 		assertEquals(actualStatus, expectedStatus);
 	}
 	
-	
-	//@Test
-	public void verifyAttendanceCreatePageIsLoaded() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyAttendanceCreatePageIsLoaded(String username, String password)
 	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
 					
@@ -441,13 +378,9 @@ public class Regression extends TestHelper
 		assertTrue(attendanceCreate.getWebElementsVisibility(), "Attendance Create page loaded!");
 	}
 	
-	//@Test	
-	public void verifyUserIsAbleToCreateAttendanceInAttendancePage() throws IOException
+	//@Test	 (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToCreateAttendanceInAttendancePage(String username, String password) 
 	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		String expectedAttendanceDate= GenericUtility.getCurrentDate();
 		
 		Login login= new Login(driver);
@@ -467,10 +400,8 @@ public class Regression extends TestHelper
 		attendanceMarkWindow.enterTimeOut(20, 10);
 		
 		attendanceMarkWindow.clickStatus("Absent");
-		
 		attendanceMarkWindow.clickShiftDropdown();
 		attendanceMarkWindow.clickShift("A");
-		
 		attendanceMarkWindow.enterReason("Not feeling well!");
 		attendanceDetails= attendanceMarkWindow.clickSave();
 		
@@ -478,12 +409,9 @@ public class Regression extends TestHelper
 		assertEquals(actualAttendanceDate, expectedAttendanceDate);
 	}
 	
-	//@Test
-	public void verifyLeavePageIsLoaded() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyLeavePageIsLoaded(String username, String password) 
 	{
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
 					
@@ -494,15 +422,12 @@ public class Regression extends TestHelper
 		assertTrue(leave.getWebElementVisibility(), "Leave Page is loaded!");
 	}
 	
-	//@Test 
-	public void verifyUserIsAbleToSeeOptionsOfWorkerDropdownInLeavePage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToSeeOptionsOfWorkerDropdownInLeavePage(String username, String password)
 	{
 		String expectedWorker1= "Sagar Alias Jacky";
 		String expectedWorker2= "Thomas Mathew";
 		String expectedWorker3= "Anil P Tharian";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -523,13 +448,9 @@ public class Regression extends TestHelper
 	}
 	
 	
-	//@Test
-	public void verifyReportPageIsLoaded() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyReportPageIsLoaded(String username, String password)
 	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
 					
@@ -540,13 +461,10 @@ public class Regression extends TestHelper
 		assertTrue(report.getWebElementsVisiblity(), "Report page is loaded!");
 	}
 	
-	//@Test 
-	public void verifyUserIsAbleToDownloadAttendanceOfTheMonthInReportPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToDownloadAttendanceOfTheMonthInReportPage(String username, String password) 
 	{
 		String downloadFolderPath= "C:\\Users\\sabar\\Downloads";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -560,21 +478,15 @@ public class Regression extends TestHelper
 		report.clickFind();
 		report.clickDownloadAttendanceOfTheMonth();
 		//report.clickCancel();
-		
 		report.clickOk();
 		
 	    boolean actualDownloadFileStatus= report.isAttendanceReportDownloaded(downloadFolderPath, "xlsx");
 	    assertTrue(actualDownloadFileStatus, "Attendance report is downloaded!");
-	
 	}
 	
-	//@Test	
-	public void verifyUserIsAbleToCreateJobInJobPage() throws IOException
+	//@Test	(dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToCreateJobInJobPage(String username, String password) 
 	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-		
 		String expectedJob="Test job";
 		
 		Login login= new Login(driver);
@@ -600,13 +512,9 @@ public class Regression extends TestHelper
 		assertEquals(actualJob, expectedJob, "Test job!");
 	}
 	
-	//@Test 
-	public void verifyJobIsNotCreatedWithoutClient() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyJobIsNotCreatedWithoutClient(String username, String password) 
 	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-			
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
 			
@@ -627,8 +535,8 @@ public class Regression extends TestHelper
 		assertTrue(createJob.getNoClientError(), "Error!");
 	}
 	
-	//@Test 
-	public void verifyUserIsAbleToViewExistingJobInJobPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToViewExistingJobInJobPage(String username, String password)
 	{
 		String expectedHeaderText= "Business Analyst";
 		String expectedClient="Client1";
@@ -636,9 +544,6 @@ public class Regression extends TestHelper
 		String expectedPo= "xyz";
 		String expectedDescription= "Challenging";
 		String expectedDate= "Apr 10, 2020";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -663,17 +568,14 @@ public class Regression extends TestHelper
 		assertEquals(actualDate, expectedDate, "Date!");
 	}
 	
-	//@Test 
-	public void verifyUserIsAbleToUpdateExistingJobInJobPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToUpdateExistingJobInJobPage(String username, String password) 
 	{
 		String expectedClient= "Client2";
 		String expectedJobType= "Normal";
 		String expectedPo= "xyz";
 		String expectedDescription= "Accounting";
 		String expectedDate= "Apr 10, 2020";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -700,13 +602,10 @@ public class Regression extends TestHelper
 		assertEquals(actualDate, expectedDate, "Date");
 	}
 	
-	//@Test 
-	public void verifyErrorDisplayedWhenClientValueIsBlankInUpdateJobDetailPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyErrorDisplayedWhenClientValueIsBlankInUpdateJobDetailPage(String username, String password) 
 	{
 		String expectedErrorMessage= "Client cannot be blank.";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -720,16 +619,12 @@ public class Regression extends TestHelper
 		assertTrue(updateJobDetails.isNoClientErrorDisplayed(),"Error!");
 	}
 	
-	//@Test 
-	public void verifyUserIsAbleToSeeOptionsInClientDropdownInUpdateJobDetailsPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToSeeOptionsInClientDropdownInUpdateJobDetailsPage(String username, String password) 
 	{
-		
 		String expectedOption1= "AAA";
 		String expectedOption2= "Client1";
 		String expectedOption3= "Client2";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -749,14 +644,11 @@ public class Regression extends TestHelper
 		assertEquals(actualOption3, expectedOption3, "Client2");
 	}
 	
-	//@Test 
-	public void verifyUserIsAbleToSeeOptionsInJobTypeDropdownInUpdateJobDetailsPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToSeeOptionsInJobTypeDropdownInUpdateJobDetailsPage(String username, String password) 
 	{
 		String expectedOption1= "Normal";
 		String expectedOption2= "Overtime";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -772,15 +664,11 @@ public class Regression extends TestHelper
 		
 		assertEquals(actualOption1, expectedOption1, "normal!");
 		assertEquals(actualOption2, expectedOption2, "overtime!");
-		
 	}
 	
-	//@Test
-	public void verifyPayrollPageIsLoaded() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyPayrollPageIsLoaded(String username, String password) 
 	{
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-			
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
 			
@@ -791,14 +679,10 @@ public class Regression extends TestHelper
 		assertEquals(payroll.getWebElementsVisiblity(), true, "Payroll Page is loaded!");
 	}
 	
-	//@Test
-	public void verifyTooltipTextOfColumnsDropdownInPayrollPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyTooltipTextOfColumnsDropdownInPayrollPage(String username, String password) 
 	{
-		
 		String expectedTooltipText= "Select columns to export";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 			
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -810,17 +694,12 @@ public class Regression extends TestHelper
 		payroll.mouseHoverOnColumnsDropdown();
 		String actualTooltipText= payroll.getTooltipTextOfColumnsDropdown();
 		assertEquals(actualTooltipText, expectedTooltipText, "Tooltip text of Cols!");
-		
 	}
 	
-	//@Test 
-	public void verifyTooltipTextOfExportAllDropdownInPayrollPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyTooltipTextOfExportAllDropdownInPayrollPage(String username, String password) 
 	{
-		
 		String expectedTooltipText= "Export data in selected format";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 			
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -832,16 +711,11 @@ public class Regression extends TestHelper
 		payroll.mouseHoverOnExportAllDropdown();
 		String actualTooltipText= payroll.getTooltipTextOfExportAllDropdown();
 		assertEquals(actualTooltipText, expectedTooltipText, "Tooltip text of Export All!");
-		
 	}
 	
-	//@Test 
-	public void verifyToggleAllCheckboxTogglesAllColumnsOfColumnsDropdownInPayrollPage() throws IOException
-	{
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
-			
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyToggleAllCheckboxTogglesAllColumnsOfColumnsDropdownInPayrollPage(String username, String password) 
+	{	
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
 			
@@ -854,11 +728,10 @@ public class Regression extends TestHelper
 		
 		boolean actualToggle= payroll.isAllDropdownOptionsToggled();
 		assertTrue(actualToggle,"Toggling!");
-		
 	}
 	
-	//@Test
-	public void verifyUserIsAbleToSeeOptionsOfExportAllDropdownInPayrollPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToSeeOptionsOfExportAllDropdownInPayrollPage(String username, String password) 
 	{
 		String expectedOption1= "HTML";
 		String expectedOption2= "CSV";
@@ -866,9 +739,6 @@ public class Regression extends TestHelper
 		String expectedOption4= "PDF";
 		String expectedOption5= "Excel 95 +";
 		String expectedOption6= "Excel 2007+";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 			
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -891,19 +761,14 @@ public class Regression extends TestHelper
 		assertEquals(actualOption4, expectedOption4, "PDF");
 		assertEquals(actualOption5, expectedOption5, "Excel 95 +");
 		assertEquals(actualOption6, expectedOption6, "Excel 2007+");
-		
 	}
 	
-	//@Test 
-	public void verifyUserIsAbleToViewExistingPayrollDetailsOfEmployeeInPayrollPage() throws IOException
+	//@Test (dataProvider= "loginCredentials")
+	public void verifyUserIsAbleToViewExistingPayrollDetailsOfEmployeeInPayrollPage(String username, String password) 
 	{
-		
 		String expectedHeaderText= "sagar";
 		String expectedFullName= "Sagar Alias Jacky";
 		String expectedBranch= "Tvmm";
-		
-		String username= ExcelUtility.readExcelCellData(path,sheet,1,0);
-		String password= ExcelUtility.readExcelCellData(path,sheet,1,1);
 			
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
@@ -921,6 +786,5 @@ public class Regression extends TestHelper
 		assertEquals(actualHeaderText, expectedHeaderText, "Header text!");
 		assertEquals(actualFullName, expectedFullName, "Sagar");
 		assertEquals(actualBranch, expectedBranch, "Tvmm");
-		
 	}	
 }
