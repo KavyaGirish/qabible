@@ -45,7 +45,7 @@ public class Area
 	}
 	public CreateArea clickCreateArea()
 	{
-		PageUtility.waitForElement(driver, createAreaButton, 5);
+		PageUtility.waitForElementClicked(driver, createAreaButton, 5);
 		createAreaButton.click();
 		return new CreateArea(driver);
 	}
@@ -61,17 +61,17 @@ public class Area
 	{
 		if(area=="Area1")
 		{
-			PageUtility.waitForElement(driver, viewArea1InAreaPage, 5);
+			PageUtility.waitForElementClicked(driver, viewArea1InAreaPage, 5);
 			viewArea1InAreaPage.click();
 		}
 		else if(area=="Area2")
 		{
-			PageUtility.waitForElement(driver, viewArea2InAreaPage, 5);
+			PageUtility.waitForElementClicked(driver, viewArea2InAreaPage, 5);
 			viewArea2InAreaPage.click();
 		}
 		else if(area=="XYZ")
 		{
-			PageUtility.waitForElement(driver, viewXYZInAreaPage, 5);
+			PageUtility.waitForElementClicked(driver, viewXYZInAreaPage, 5);
 			viewXYZInAreaPage.click();
 		}
 		else
@@ -83,17 +83,17 @@ public class Area
 	{
 		if(area=="Area1")
 		{
-			PageUtility.waitForElement(driver, updateArea1InAreaPage, 5);
+			PageUtility.waitForElementClicked(driver, updateArea1InAreaPage, 5);
 			updateArea1InAreaPage.click();
 		}
 		else if(area=="Area2")
 		{
-			PageUtility.waitForElement(driver, updateArea2InAreaPage, 5);
+			PageUtility.waitForElementClicked(driver, updateArea2InAreaPage, 5);
 			updateArea2InAreaPage.click();
 		}
 		else if(area=="XYZ")
 		{
-			PageUtility.waitForElement(driver, updateXYZInAreaPage, 5);
+			PageUtility.waitForElementClicked(driver, updateXYZInAreaPage, 5);
 			updateXYZInAreaPage.click();
 		}
 		else {}

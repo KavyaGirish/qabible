@@ -42,7 +42,7 @@ public class AreaDetails
 	}
 	public UpdateAreaDetails clickUpdate()
 	{
-		PageUtility.waitForElement(driver, updateButton, 5);
+		PageUtility.waitForElementClicked(driver, updateButton, 5);
 		updateButton.click();
 		return new UpdateAreaDetails(driver);
 	}

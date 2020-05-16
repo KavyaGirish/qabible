@@ -68,7 +68,7 @@ public class Attendance
 	}
 	public void clickBranchDropdown()
 	{
-		PageUtility.waitForElement(driver, branchDropdown, 5);
+		PageUtility.waitForElementClicked(driver, branchDropdown, 5);
 		branchDropdown.click();
 	}
 	public String getBranch(String branch)
@@ -89,43 +89,43 @@ public class Attendance
 	{
 		if(branch=="Banglore")
 		{
-			PageUtility.waitForElement(driver, branchBanglore, 5);
+			PageUtility.waitForElementClicked(driver, branchBanglore, 5);
 			branchBanglore.click();
 		}
 		else if(branch=="Bhopal")
 		{
-			PageUtility.waitForElement(driver, branchBhopal, 5);
+			PageUtility.waitForElementClicked(driver, branchBhopal, 5);
 			branchBhopal.click();
 		}
 		else {}
 	}
 	public AttendanceCreate clickCreateAttendance()
 	{
-		PageUtility.waitForElement(driver, attendanceCreate, 5);
+		PageUtility.waitForElementClicked(driver, attendanceCreate, 5);
 		attendanceCreate.click();
 		return new AttendanceCreate(driver);
 	}
 	public Report clickReport()
 	{
-		PageUtility.waitForElement(driver, report, 5);
+		PageUtility.waitForElementClicked(driver, report, 5);
 		report.click();
 		return new Report(driver);
 	}
 	public Leave clickLeave()
 	{
-		PageUtility.waitForElement(driver, leave, 5);
+		PageUtility.waitForElementClicked(driver, leave, 5);
 		leave.click();
 		return new Leave(driver);
 	}
 	public Holiday clickHoliday()
 	{
-		PageUtility.waitForElement(driver, holiday, 5);
+		PageUtility.waitForElementClicked(driver, holiday, 5);
 		holiday.click();
 		return new Holiday(driver);
 	}
 	public Payroll clickPayroll()
 	{
-		PageUtility.waitForElement(driver, payroll, 5);
+		PageUtility.waitForElementClicked(driver, payroll, 5);
 		payroll.click();
 		return new Payroll(driver);
 	}

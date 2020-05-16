@@ -31,17 +31,17 @@ public class CreateArea
 	}
 	public void enterName(String name)
 	{
-		PageUtility.waitForElement(driver, fieldNameInCreateAreaPage, 5);
+		PageUtility.waitForElementClicked(driver, fieldNameInCreateAreaPage, 5);
 		fieldNameInCreateAreaPage.sendKeys(name);
 	}
 	public void enterDescription(String description)
 	{
-		PageUtility.waitForElement(driver, fieldNameInCreateAreaPage, 5);
+		PageUtility.waitForElementClicked(driver, fieldNameInCreateAreaPage, 5);
 		fieldDescriptionInCreateAreaPage.sendKeys(description);
 	}
 	public AreaDetails clickSave()
 	{
-		PageUtility.waitForElement(driver, buttonSave, 5);
+		PageUtility.waitForElementClicked(driver, buttonSave, 5);
 		buttonSave.click();
 		return new AreaDetails(driver);
 	}

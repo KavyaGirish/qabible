@@ -54,13 +54,13 @@ public class HolidayDetails
 	}
 	public UpdateHolidayDetails clickUpdate()
 	{
-		PageUtility.waitForElement(driver, updateButton, 5);
+		PageUtility.waitForElementClicked(driver, updateButton, 5);
 		updateButton.click();
 		return new UpdateHolidayDetails(driver);
 	}
 	public HolidayDeletionAlert clickDelete()
 	{
-		PageUtility.waitForElement(driver, deleteButton, 5);
+		PageUtility.waitForElementClicked(driver, deleteButton, 5);
 		deleteButton.click();
 		return new HolidayDeletionAlert(driver);
 	}

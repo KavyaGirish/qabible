@@ -127,12 +127,12 @@ public class CreateJob
 	{
 		if(jobType=="Normal")
 		{
-			PageUtility.waitForElement(driver, jobType_Normal, 5);
+			PageUtility.waitForElementClicked(driver, jobType_Normal, 5);
 			jobType_Normal.click();
 		}
 		else if(jobType=="Overtime")
 		{
-			PageUtility.waitForElement(driver, jobType_Overtime, 5);
+			PageUtility.waitForElementClicked(driver, jobType_Overtime, 5);
 			jobType_Overtime.click();
 		}
 	}

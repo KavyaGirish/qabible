@@ -1,6 +1,5 @@
 package scripts;
 
-
 import org.testng.annotations.BeforeMethod;
 
 import com.google.common.io.Files;

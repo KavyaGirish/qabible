@@ -58,19 +58,19 @@ public class Leave
 	}
 	public void clickLeaveDaysDropdown()
 	{
-		PageUtility.waitForElement(driver, leaveDaysDropdown, 5);
+		PageUtility.waitForElementClicked(driver, leaveDaysDropdown, 5);
 		leaveDaysDropdown.click();
 	}
 	public void clickStartDate(String worker)
 	{
 		if(worker=="Worker1")
 		{
-			PageUtility.waitForElement(driver, startDateForLeave_Worker1, 5);
+			PageUtility.waitForElementClicked(driver, startDateForLeave_Worker1, 5);
 			startDateForLeave_Worker1.click();
 		}
 		else if(worker=="Worker2")
 		{
-			PageUtility.waitForElement(driver, startDateForLeave_Worker2, 10);
+			PageUtility.waitForElementClicked(driver, startDateForLeave_Worker2, 10);
 			startDateForLeave_Worker2.click();
 		}
 		else {}
@@ -79,29 +79,29 @@ public class Leave
 	{
 		if(worker=="Worker1")
 		{
-			PageUtility.waitForElement(driver, endDateForLeave_Worker1, 10);
+			PageUtility.waitForElementClicked(driver, endDateForLeave_Worker1, 10);
 			endDateForLeave_Worker1.click();
 		}
 		else if(worker=="Worker2")
 		{
-			PageUtility.waitForElement(driver, endDateForLeave_Worker2, 10);
+			PageUtility.waitForElementClicked(driver, endDateForLeave_Worker2, 10);
 			endDateForLeave_Worker2.click();
 		}
 		else {}
 	}
 	public void clickCancel()
 	{
-		PageUtility.waitForElement(driver, cancelButtonInDatePicker, 5);
+		PageUtility.waitForElementClicked(driver, cancelButtonInDatePicker, 5);
 		cancelButtonInDatePicker.click();
 	}
 	public void clickApply()
 	{
-		PageUtility.waitForElement(driver, applyButtonInDatePicker, 5);
+		PageUtility.waitForElementClicked(driver, applyButtonInDatePicker, 5);
 		applyButtonInDatePicker.click();
 	}
 	public void clickWorkerDropdown()
 	{
-		PageUtility.waitForElement(driver, worker, 10);
+		PageUtility.waitForElementClicked(driver, worker, 10);
 		worker.click();
 	}
 	public String getWorker(String worker)
@@ -132,29 +132,29 @@ public class Leave
 	{
 		if(worker=="Worker1")
 		{
-			PageUtility.waitForElement(driver, worker1, 10);
+			PageUtility.waitForElementClicked(driver, worker1, 10);
 			worker1.click();
 		}
 		else if(worker=="Worker2")
 		{
-			PageUtility.waitForElement(driver, worker2, 10);
+			PageUtility.waitForElementClicked(driver, worker2, 10);
 			worker2.click();
 		}
 		else if(worker=="Worker3")
 		{
-			PageUtility.waitForElement(driver, worker3, 10);
+			PageUtility.waitForElementClicked(driver, worker3, 10);
 			worker3.click();
 		}
 		else {}
 	}
 	public void enterReason(String reason)
 	{
-		PageUtility.waitForElement(driver, reasonForLeave, 5);
+		PageUtility.waitForElementClicked(driver, reasonForLeave, 5);
 		reasonForLeave.sendKeys(reason);
 	}
 	public Attendance clickSave()
 	{
-		PageUtility.waitForElement(driver, saveButton, 5);
+		PageUtility.waitForElementClicked(driver, saveButton, 5);
 		saveButton.click();
 		return new Attendance(driver);
 	}

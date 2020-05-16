@@ -38,7 +38,7 @@ public class Holiday
 	}
 	public CreateHoliday clickCreateHoliday()
 	{
-		PageUtility.waitForElement(driver, createHolidayButton, 5);
+		PageUtility.waitForElementClicked(driver, createHolidayButton, 5);
 		createHolidayButton.click();
 		return new CreateHoliday(driver);
 	}
@@ -57,7 +57,7 @@ public class Holiday
 	{
 		if(holiday=="Holiday2")
 		{
-			PageUtility.waitForElement(driver, updateButtonOfHoliday2, 5);
+			PageUtility.waitForElementClicked(driver, updateButtonOfHoliday2, 5);
 			updateButtonOfHoliday2.click();
 		}
 		return new UpdateHolidayDetails(driver);
@@ -66,12 +66,12 @@ public class Holiday
 	{
 		if(holiday=="Holiday2")
 		{
-			PageUtility.waitForElement(driver, deleteButtonOfHoliday2, 5);
+			PageUtility.waitForElementClicked(driver, deleteButtonOfHoliday2, 5);
 			deleteButtonOfHoliday2.click();
 		}
 		else if(holiday=="Holiday3")
 		{
-			PageUtility.waitForElement(driver, deleteButtonOfHoliday3, 5);
+			PageUtility.waitForElementClicked(driver, deleteButtonOfHoliday3, 5);
 			deleteButtonOfHoliday3.click();
 		}
 		else

@@ -59,7 +59,7 @@ public class Job
 	}
 	public CreateJob clickCreateJobs()
 	{
-		PageUtility.waitForElement(driver, createJobButton, 5);
+		PageUtility.waitForElementClicked(driver, createJobButton, 5);
 		createJobButton.click();
 		return new CreateJob(driver);
 	}
@@ -74,13 +74,13 @@ public class Job
 	}
 	public CreateArea clickCreateArea()
 	{
-		PageUtility.waitForElement(driver, createAreaModule, 5);
+		PageUtility.waitForElementClicked(driver, createAreaModule, 5);
 		createAreaModule.click();
 		return new CreateArea(driver);
 	}
 	public Area clickArea()
 	{
-		PageUtility.waitForElement(driver, areaModule, 5);
+		PageUtility.waitForElementClicked(driver, areaModule, 5);
 		areaModule.click();
 		return new Area(driver);
 	}

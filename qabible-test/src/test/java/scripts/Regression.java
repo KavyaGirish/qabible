@@ -43,17 +43,7 @@ public class Regression extends TestHelper
 	
 	@DataProvider (name="loginCredentials")
 	public Object[][] getLoginCredentials() throws Exception
-	{
-		/*
-		Object[][] credentials= {
-					{ExcelUtility.readExcelCellData(path, sheet, 1, 0), ExcelUtility.readExcelCellData(path, sheet, 1, 1)}, 
-					{ExcelUtility.readExcelCellData(path, sheet, 2, 0), ExcelUtility.readExcelCellData(path, sheet, 2, 1)},
-					{ExcelUtility.readExcelCellData(path, sheet, 3, 0), ExcelUtility.readExcelCellData(path, sheet, 3, 1)}, 
-					{ExcelUtility.readExcelCellData(path, sheet, 4, 0), ExcelUtility.readExcelCellData(path, sheet, 4, 1)}
-					};
-		return credentials;
-		*/
-		
+	{	
 		int rowCount= ExcelUtility.getRowCount(path, sheet);
 		//System.out.println(rowCount);
 		int columnCount= ExcelUtility.getColumnCount(path, sheet);
@@ -398,7 +388,6 @@ public class Regression extends TestHelper
 		
 		attendanceMarkWindow.enterTimeIn(12, 30);
 		attendanceMarkWindow.enterTimeOut(20, 10);
-		
 		attendanceMarkWindow.clickStatus("Absent");
 		attendanceMarkWindow.clickShiftDropdown();
 		attendanceMarkWindow.clickShift("A");
@@ -605,8 +594,6 @@ public class Regression extends TestHelper
 	//@Test (dataProvider= "loginCredentials")
 	public void verifyErrorDisplayedWhenClientValueIsBlankInUpdateJobDetailPage(String username, String password) 
 	{
-		String expectedErrorMessage= "Client cannot be blank.";
-		
 		Login login= new Login(driver);
 		Homepage homepage= login.login(username,password);
 			

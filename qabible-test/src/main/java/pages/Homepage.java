@@ -54,7 +54,7 @@ public class Homepage
 	}
 	public void clickModuleJobsInDashboard()
 	{
-		PageUtility.waitForElement(driver, jobsModuleInDashboard, 5);
+		PageUtility.waitForElementClicked(driver, jobsModuleInDashboard, 5);
 		jobsModuleInDashboard.click();
 	}
 	public String getOptionAttendanceFromJobsModule()
@@ -67,13 +67,13 @@ public class Homepage
 	}
 	public Attendance clickOptionAttendanceFromJobsModule()
 	{
-		PageUtility.waitForElement(driver, attendanceOption, 5);
+		PageUtility.waitForElementClicked(driver, attendanceOption, 5);
 		attendanceOption.click();
 		return new Attendance(driver);
 	}
 	public Job clickOptionJobFromJobsModule()
 	{
-		PageUtility.waitForElement(driver, jobOption, 5);
+		PageUtility.waitForElementClicked(driver, jobOption, 5);
 		jobOption.click();
 		return new Job(driver);
 	}

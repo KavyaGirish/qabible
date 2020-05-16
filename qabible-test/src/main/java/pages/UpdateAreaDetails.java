@@ -34,19 +34,19 @@ public class UpdateAreaDetails
 	}
 	public void enterName(String updatedName)
 	{
-		PageUtility.waitForElement(driver, updatedNameOfArea, 5);
+		PageUtility.waitForElementClicked(driver, updatedNameOfArea, 5);
 		updatedNameOfArea.clear();
 		updatedNameOfArea.sendKeys(updatedName);
 	}
 	public void enterDescription(String updatedDescription)
 	{
-		PageUtility.waitForElement(driver, updatedDescriptionOfArea, 5);
+		PageUtility.waitForElementClicked(driver, updatedDescriptionOfArea, 5);
 		updatedDescriptionOfArea.clear();
 		updatedDescriptionOfArea.sendKeys(updatedDescription);
 	}
 	public AreaDetails clickSave()
 	{
-		PageUtility.waitForElement(driver, saveButton, 5);
+		PageUtility.waitForElementClicked(driver, saveButton, 5);
 		saveButton.click();
 		return new AreaDetails(driver);
 	}

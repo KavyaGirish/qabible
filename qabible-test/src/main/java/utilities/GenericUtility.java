@@ -41,16 +41,15 @@ public class GenericUtility
 	            randomString= "auto_"+sb.append(randomChar).toString();
 	        }
 		}
-		System.out.println("Random String= "+ randomString);
+		//System.out.println("Random String= "+ randomString);
 		return randomString;	
 	}
 	
-	public static int generateRandomNumber()	//doubt
+	public static int generateRandomNumber()
 	{
-		
 		Random random = new Random(); 
 		int random_number= random.nextInt(Integer.MAX_VALUE);
-		System.out.println("Random Number= auto_"+ random_number);
+		//System.out.println("Random Number= auto_"+ random_number);
 		return random_number;
 	}
 	

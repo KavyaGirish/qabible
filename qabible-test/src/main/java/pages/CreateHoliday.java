@@ -59,22 +59,22 @@ public class CreateHoliday
 	}
 	public void clickDatePicker()
 	{
-		PageUtility.waitForElement(driver, datePicker, 5);
+		PageUtility.waitForElementClicked(driver, datePicker, 5);
 		datePicker.click();
 	}
 	public void clickDate()
 	{
-		PageUtility.waitForElement(driver, currentDate, 5);
+		PageUtility.waitForElementClicked(driver, currentDate, 5);
 		currentDate.click();
 	}
 	public void enterDate(String date)
 	{
-		PageUtility.waitForElement(driver, inputDate, 5);
+		PageUtility.waitForElementClicked(driver, inputDate, 5);
 		inputDate.sendKeys(date);
 	}
 	public void clickClose()
 	{
-		PageUtility.waitForElement(driver, clearDate, 5);
+		PageUtility.waitForElementClicked(driver, clearDate, 5);
 		clearDate.click();
 	}
 	public String getDate()
@@ -83,34 +83,34 @@ public class CreateHoliday
 	}
 	public void enterTitle(String title)
 	{
-		PageUtility.waitForElement(driver, holidayTitle, 5);
+		PageUtility.waitForElementClicked(driver, holidayTitle, 5);
 		holidayTitle.sendKeys(title);
 	}
 	public void clickBranchDropdown()
 	{
-		PageUtility.waitForElement(driver, branchDropdown, 5);
+		PageUtility.waitForElementClicked(driver, branchDropdown, 5);
 		branchDropdown.click();
 	}
 	public void clickBranch(String branch)
 	{
 		if(branch=="Tvmm")
 		{
-			PageUtility.waitForElement(driver, branchTvmm, 5);
+			PageUtility.waitForElementClicked(driver, branchTvmm, 5);
 			branchTvmm.click();
 		}
 		else if(branch=="Bhopal")
 		{
-			PageUtility.waitForElement(driver, branchBhopal, 5);
+			PageUtility.waitForElementClicked(driver, branchBhopal, 5);
 			branchBhopal.click();
 		}
 		else if(branch=="Kozhikode")
 		{
-			PageUtility.waitForElement(driver, branchKozhikode, 5);
+			PageUtility.waitForElementClicked(driver, branchKozhikode, 5);
 			branchKozhikode.click();
 		}
 		else if(branch=="All")
 		{
-			PageUtility.waitForElement(driver, branchAll, 5);
+			PageUtility.waitForElementClicked(driver, branchAll, 5);
 			branchAll.click();
 		}
 		else
@@ -118,17 +118,17 @@ public class CreateHoliday
 	}
 	public void enterDescription(String description)
 	{
-		PageUtility.waitForElement(driver, holidayDescription, 5);
+		PageUtility.waitForElementClicked(driver, holidayDescription, 5);
 		holidayDescription.sendKeys(description);
 	}
 	public void clickStatus()
 	{
-		PageUtility.waitForElement(driver, holidayStatus, 5);
+		PageUtility.waitForElementClicked(driver, holidayStatus, 5);
 		holidayStatus.click();
 	}
 	public HolidayDetails clickSave()
 	{
-		PageUtility.waitForElement(driver, saveButton, 5);
+		PageUtility.waitForElementClicked(driver, saveButton, 5);
 		saveButton.click();
 		return new HolidayDetails(driver);
 	}

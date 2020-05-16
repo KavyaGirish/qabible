@@ -156,7 +156,7 @@ public class Report
 	}
 	public void clickFind()
 	{
-		PageUtility.waitForElement(driver, findButton, 10);
+		PageUtility.waitForElementClicked(driver, findButton, 10);
 		findButton.click();
 	}
 	

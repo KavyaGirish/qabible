@@ -36,7 +36,7 @@ public class Login
 	}
 	public String getErrorMessage()
 	{
-		PageUtility.waitForElement(driver, errorMessage, 5);
+		PageUtility.waitForElementClicked(driver, errorMessage, 5);
 		return errorMessage.getText();
 	}
 	public void clearTextFields()

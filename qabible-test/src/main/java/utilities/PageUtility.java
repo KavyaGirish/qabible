@@ -17,12 +17,6 @@ public class PageUtility
 		{	e.printStackTrace();	}
 	}
 	
-	public static void waitForElement(WebDriver driver, WebElement element, int time) 
-	{
-		WebDriverWait wait = new WebDriverWait(driver,time);
-		wait.until(ExpectedConditions.elementToBeClickable(element));
-	}
-	
 	public static void waitForElementSelected(WebDriver driver, WebElement element, int time) 
 	{
 		WebDriverWait wait = new WebDriverWait(driver,time);
@@ -46,6 +40,4 @@ public class PageUtility
 		WebDriverWait wait = new WebDriverWait(driver,time);
 		wait.until(ExpectedConditions.alertIsPresent());
 	}
-	
-	
 }

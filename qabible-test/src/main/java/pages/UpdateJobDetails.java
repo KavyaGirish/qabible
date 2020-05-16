@@ -63,7 +63,7 @@ public class UpdateJobDetails
 	}
 	public void clearClient()
 	{
-		PageUtility.waitForElement(driver, clearClientValue, 5);
+		PageUtility.waitForElementClicked(driver, clearClientValue, 5);
 		clearClientValue.click();
 	}
 	public boolean isNoClientErrorDisplayed()
@@ -81,24 +81,24 @@ public class UpdateJobDetails
 	}
 	public void clickClientDropdown()
 	{
-		PageUtility.waitForElement(driver, clientDropdown, 10);
+		PageUtility.waitForElementClicked(driver, clientDropdown, 10);
 		clientDropdown.click();
 	}
 	public void clickClient(String client) 
 	{
 		if(client=="AAA")
 		{
-			PageUtility.waitForElement(driver, client_AAA, 5);
+			PageUtility.waitForElementClicked(driver, client_AAA, 5);
 			new Actions(driver).doubleClick(client_AAA);
 		}
 		else if(client=="Client1")
 		{
-			PageUtility.waitForElement(driver, client_Client1, 5);
+			PageUtility.waitForElementClicked(driver, client_Client1, 5);
 			new Actions(driver).doubleClick(client_Client1);
 		}
 		else if(client=="Client2")
 		{
-			PageUtility.waitForElement(driver, client_Client2, 5);
+			PageUtility.waitForElementClicked(driver, client_Client2, 5);
 			new Actions(driver).doubleClick(client_Client2);
 		}
 		else
@@ -128,19 +128,19 @@ public class UpdateJobDetails
 	}
 	public void clickJobType()
 	{
-		PageUtility.waitForElement(driver, jobType, 20);
+		PageUtility.waitForElementClicked(driver, jobType, 20);
 		jobType.click();
 	}
 	public void clickJobType(String type)
 	{
 		if(type=="Normal")
 		{
-			PageUtility.waitForElement(driver, jobType_Normal, 20);
+			PageUtility.waitForElementClicked(driver, jobType_Normal, 20);
 			jobType_Normal.click();
 		}
 		else if (type=="Overtime")
 		{
-			PageUtility.waitForElement(driver, jobType_Overtime, 20);
+			PageUtility.waitForElementClicked(driver, jobType_Overtime, 20);
 			jobType_Overtime.click();
 		}
 		else
@@ -163,13 +163,13 @@ public class UpdateJobDetails
 	}
 	public void enterPo(String poUpdate)
 	{
-		PageUtility.waitForElement(driver, po, 20);
+		PageUtility.waitForElementClicked(driver, po, 20);
 		po.clear();
 		po.sendKeys(poUpdate);
 	}
 	public void enterDescription(String desc)
 	{
-		PageUtility.waitForElement(driver, description, 20);
+		PageUtility.waitForElementClicked(driver, description, 20);
 		description.clear();
 		description.sendKeys(desc);
 	}

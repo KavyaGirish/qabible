@@ -137,12 +137,12 @@ public class Payroll
 	}
 	public void clickColumsDropdown()
 	{
-		PageUtility.waitForElement(driver, colsDropdown, 10);
+		PageUtility.waitForElementClicked(driver, colsDropdown, 10);
 		colsDropdown.click();
 	}
 	public void clickToggleAll()	//checkbox
 	{
-		PageUtility.waitForElement(driver, toggleAll_ColsDropdown, 15);
+		PageUtility.waitForElementClicked(driver, toggleAll_ColsDropdown, 15);
 		toggleAll_ColsDropdown.click();
 	}
 	public boolean isAllDropdownOptionsToggled()
