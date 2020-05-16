@@ -51,7 +51,6 @@ public class TestHelper
 				System.out.println("Exception while taking screenshot: "+e.getMessage());
 			}
 		}
-		
 		driver.close();
 	}
 

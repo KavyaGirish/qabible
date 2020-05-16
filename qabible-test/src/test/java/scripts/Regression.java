@@ -61,20 +61,6 @@ public class Regression extends TestHelper
 		return credentials; 
 	}
 	
-	@Test(dataProvider= "loginCredentials")
-	public void verifyLogin(String username, String password)
-	{
-		String expectedPageHeader= "ERP | Dashboard";
-		
-		Login login= new Login(driver);
-		System.out.println(username);
-		System.out.println(password);
-		Homepage homepage= login.login(username, password);
-			
-		String actualPageHeader= homepage.getHomepageHeaderText();
-		assertEquals(actualPageHeader, expectedPageHeader, "Homepage Launches!");
-	}
-	
 	//@Test (dataProvider= "loginCredentials")
 	public void verifyValidLogin(String username, String password)
 	{
